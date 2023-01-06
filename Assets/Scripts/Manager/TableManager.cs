@@ -45,7 +45,14 @@ public class TableManager : MonoBehaviour
     {
         StartCoroutine(corFunc_RollTable());
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.End))
+            StartTable();
+        if (Input.GetKeyDown(KeyCode.Space))
+            turnEnd = true;
+    }
 
 
     /// <summary>
@@ -63,7 +70,15 @@ public class TableManager : MonoBehaviour
             {
                 Debug.Log("Now Player : " + j);
 
+                //플레이어 턴 실행
+                Run_PlayerTurn(j);
+
                 yield return new WaitUntil(() => turnEnd == true);
+                turnEnd = false;
+
+
+
+
             }
         }
     }
@@ -73,6 +88,20 @@ public class TableManager : MonoBehaviour
     // 카드를 구매 - 사용한다
     // 다음 플레이어에게 넘긴다.
     // 반복
+
+
+    /// <summary>
+    /// 플레이어 턴을 실행한다.
+    /// </summary>
+    /// <param name="rsh"></param>
+    public void Run_PlayerTurn(int rsh)
+    {
+
+        //rsh를 기반으로 하위 실질적으로 동작이 필요한 오브젝트들에게 턴 동작을 하게 만든다.
+
+
+    }
+
 
 
 
