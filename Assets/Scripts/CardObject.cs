@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CardObject : MonoBehaviour
 {
 
+    [SerializeField] private Image image;
     [SerializeField] private CardData cardData;
     public CardData CardData { get => cardData; set => cardData = value; }
     
