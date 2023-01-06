@@ -15,12 +15,6 @@ public class Deck : MonoBehaviour
             Shuffle();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void LoadCards()
     {
         StreamReader fs = new StreamReader(Path.Combine(Application.dataPath, "Resources/Json/cards.json"));
