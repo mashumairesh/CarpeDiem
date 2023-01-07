@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
 
     [SerializeField] private RectTransform ShoppingPannel;
+    [SerializeField] private GameObject ShoppingClickBlocker;
     
     [SerializeField] private List<Button> ShoppingButton;
     [SerializeField] private List<bool> ShoppingButtonAble;
@@ -49,6 +50,7 @@ public class UIManager : MonoBehaviour
 
     public void Popdown_PurchaseUI(int rsh)
     {
+
         List<int> tmp = new List<int>();
         for (int i = 0; i < 5; i++) tmp.Add(0);
         tmp[rsh] = ShoppingTextResource[rsh] + ShoppingTextResource[rsh + 5];
@@ -69,6 +71,7 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator corFunc_PopupPurchaseUI()
     {
+        ShoppingClickBlocker.SetActive(true);
         ButtonClose();
         ShoppingPannel.DOMoveY(1080 * 2, 0f);
         ShoppingPannel.gameObject.SetActive(true);
@@ -92,6 +95,7 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         ShoppingPannel.gameObject.SetActive(false);
+        ShoppingClickBlocker.SetActive(false);
     }
 
 }
