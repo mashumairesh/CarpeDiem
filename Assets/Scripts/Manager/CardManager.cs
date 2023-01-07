@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class CardManager : MonoBehaviour
 {
     public static CardManager instance;
@@ -12,24 +12,33 @@ public class CardManager : MonoBehaviour
     [SerializeField] private int marketMax; //마켓에 최대로 들어갈 수 있는 카드의 갯수
     private List<GameObject> listMarketCardGO;//마켓 카드 리스트
     private List<CardScript> listMarketCardCS;//마켓 카드 리스트
+    private List<CardData> listOrgData;
 
     private List<List<GameObject>> listPlayerCard;  //플레이어들이 가진 카드 리스트
 
     [SerializeField] private List<Transform> listMarketHolder;   //마켓에 카드가 들어갈 홀더
-
+    [SerializeField] private Deck deck;     //덱...
 
     [SerializeField] private GameObject TestCard;
     [SerializeField] private int TestAmount;
+
+    
 
     private void OnEnable()
     {
         if (instance == null)
             instance = this;
+    }
+
+    private void Start()
+    {
         Initialize();
     }
 
     private void Update()
     {
+        //if(Input.GetKeyDown(KeyCode.I))
+        //    Initialize();
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //테스트 소모
@@ -56,7 +65,8 @@ public class CardManager : MonoBehaviour
     private void GenerationCardList()
     {
         //테스트 생성
-        TestCardMake();
+        //TestCardMake();
+        GenerateCardGameObject();
 
         //listGenCard에 생성된 카드를 가져와 저장함.
 
@@ -70,6 +80,23 @@ public class CardManager : MonoBehaviour
 
     }
 
+    private void GenerateCardGameObject()
+    {
+        Debug.Log(deck);
+        listOrgData = new List<CardData>();
+        listOrgData = deck.cards;
+        Debug.Log(deck.cards);
+        int LoopAmount = listOrgData.Count;
+
+        Debug.Log("Count" + listOrgData.Count);
+        for (int i = 0; i < LoopAmount; i++)
+        {
+            Debug.Log(listOrgData[i].Price.Count + " " + listOrgData[i].Effect.Count);
+            listGenCard.Add(Instantiate(TestCard));
+            listGenCard[i].GetComponent<CardScript>().Initalize(listOrgData[i]);
+        }
+    }
+
     private void TestCardMake()
     {
         for (int i = 0; i < TestAmount; i++)
@@ -81,6 +108,7 @@ public class CardManager : MonoBehaviour
     {
         if (listMarketCardGO.Count != 0)
         {
+            listMarketCardGO[0].transform.DOKill(false);
             Destroy(listMarketCardGO[0]);
             listMarketCardGO.RemoveAt(0);
             Add_Market();
@@ -90,7 +118,7 @@ public class CardManager : MonoBehaviour
     /// <summary>
     /// 자신이 가진 모든 카드 리스트를 기반으로 가장 첫번째 인덱스의 카드를 마켓에 추가합니다.
     /// </summary>
-    private void Add_Market()
+    public void Add_Market()
     {
         int tmp = marketMax - listMarketCardGO.Count;
         GameObject tmpG;
@@ -105,7 +133,6 @@ public class CardManager : MonoBehaviour
                 }
             }
     }
-
 
     /// <summary>
     /// 마켓에서부터 카드를 가져옵니다.
@@ -146,7 +173,8 @@ public class CardManager : MonoBehaviour
         for(int i = 0; i < listMarketCardGO.Count; i++)
         {
             //위치 변경
-            listMarketCardGO[i].transform.position = listMarketHolder[i].transform.position;
+            listMarketCardGO[i].transform.DOMove(listMarketHolder[i].transform.position, 0.3f);
+            //listMarketCardGO[i].transform.position = listMarketHolder[i].transform.position;
         }
     }
 
