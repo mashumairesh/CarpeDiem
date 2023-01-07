@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
         slotUsed += newcard.GetComponent<CardScript>().GetSlot();
         int index = _fields.Count-1;
         _fields[index].transform.parent = transform;
-        _fields[index].transform.position = Vector3.right * cardGap * index;
+        _fields[index].transform.localPosition = Vector3.right * cardGap * index;
     }
 
     /// <summary>
