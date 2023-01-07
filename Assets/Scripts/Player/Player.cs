@@ -18,6 +18,12 @@ public class Player : MonoBehaviour
     public List<int> Resource { get => _resource; set => _resource = value; }
     public List<GameObject> Fields { get => _fields; set => _fields = value; }
 
+    public void Initialize()
+    {
+        _resource = new List<int>();
+        _fields = new List<GameObject>();
+    }
+
     public void Gain(List<int> gain)    // 턴 종류 후 카드 효과에 의한 돈,자원의 증가
     {
         for (int i = 0; i < gain.Count; i++)
