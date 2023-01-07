@@ -40,6 +40,12 @@ public class TableManager : MonoBehaviour
     [SerializeField] private GameObject TurnEndBlock;
     [SerializeField] private GameObject TurnEndBlockImg;
 
+    [SerializeField] private TextMeshProUGUI GameOverMessage;
+    [SerializeField] private GameObject GameOverBlock;
+    [SerializeField] private GameObject GameOverBlockImg;
+
+    private int CountEndCards = 0;
+
     private bool hasInit = false;
 
     private void OnEnable()
@@ -53,6 +59,9 @@ public class TableManager : MonoBehaviour
         TurnEndBlock.SetActive(false);
         TurnEndBlockImg.SetActive(false);
         TurnEndMessage.gameObject.SetActive(false);
+        GameOverBlock.SetActive(false);
+        GameOverBlockImg.SetActive(false);
+        GameOverMessage.gameObject.SetActive(false);
         if (!hasInit)
             Initialize();
     }
@@ -184,13 +193,23 @@ public class TableManager : MonoBehaviour
         //마켓 충당
         CardManager.instance.Add_Market();
 
+        // test increase
+        // increaseCEC();
+
         // 턴 종류 메세지 띄우기
         StartCoroutine(EndMessage());
+
+        // 게임 종료 조건 확인하기
+        CheckGameOver();
 
         End_AfterPlayerTurn();
 
     }
 
+    /// <summary>
+    /// 턴 종료 메세지를 띄운다.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator EndMessage()
     {
         TurnEndMessage.gameObject.SetActive(true);
@@ -200,6 +219,38 @@ public class TableManager : MonoBehaviour
         TurnEndMessage.gameObject.SetActive(false);
         TurnEndBlock.SetActive(false);
         TurnEndBlockImg.SetActive(false);
+    }
+
+    /// <summary>
+    /// 게임 종료 조건을 확인한다. 
+    /// 조건이 맞으면 게임 종료 문구를 출력한다.
+    /// </summary>
+    private void CheckGameOver()
+    {
+        if (CountEndCards >= 3)
+        {
+            StartCoroutine(OverMessage());
+        }
+    }
+
+    /// <summary>
+    /// 게임 종료 문구를 출력한다.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator OverMessage()
+    {
+        yield return new WaitForSeconds(2f);
+        GameOverMessage.gameObject.SetActive(true);
+        GameOverBlock.SetActive(true);
+        GameOverBlockImg.SetActive(true);
+    }
+
+    /// <summary>
+    /// Cardmanager에서 호출 가능하다. 종료 카드 수를 증가시킨다.
+    /// </summary>
+    public void increaseCEC()
+    {
+        CountEndCards++;
     }
 
     /// <summary>
