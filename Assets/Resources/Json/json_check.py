@@ -17,6 +17,5 @@ for card in cards:
     print("turn zero error:"+str(card["id"]))
   if card["slot"] > 4:
     print("slot too big error:"+str(card["id"]))
-    
-  
-
+  if card["effect"][5] == 1:
+    print("end card:"+str(card["id"]))

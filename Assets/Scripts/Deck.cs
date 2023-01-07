@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Deck : MonoBehaviour
@@ -38,12 +39,25 @@ public class Deck : MonoBehaviour
 
     void Shuffle()
     {
-        for(int i=0; i<_cards.Count - 1; i++) {
-            int rnd = UnityEngine.Random.Range(i, _cards.Count - 1);
-            CardData tmp = _cards[i];
-            _cards[i] = _cards[rnd];
-            _cards[rnd] = tmp;
+        for(int i=0; i<_cards.Count - 1 - 4; i++) {
+            int rnd = UnityEngine.Random.Range(i, _cards.Count - 4);
+            exchange(i, rnd);
         }
+        for(int i=1;i<=4;i++)
+        {
+            int rnd = UnityEngine.Random.Range(1, 25);
+            exchange(rnd, 45 + i);
+            for(int j=rnd;j<_cards.Count - 1 - 4 + i; j++)
+            {
+                exchange(j, j + 1);
+            }
+        }
+    }
+    private void exchange(int x, int y)
+    {
+        CardData tmp = _cards[x];
+        _cards[x] = _cards[y];
+        _cards[y] = tmp;
     }
     public CardData Draw()
     {
