@@ -32,6 +32,9 @@ public class TableManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI tmpSpendTurn;  //지난 턴
     [SerializeField] private TextMeshProUGUI tmpLimitTurn;  //최대 턴
 
+    [SerializeField] private TextMeshProUGUI tmpNowTurn;
+
+    [SerializeField] private List<TestPointPanel> testPointPanel;
 
     private bool hasInit = false;
 
@@ -45,6 +48,11 @@ public class TableManager : MonoBehaviour
     {
         if (!hasInit)
             Initialize();
+    }
+
+    private void Start()
+    {
+        StartTable();
     }
 
     private void Initialize()
@@ -68,12 +76,12 @@ public class TableManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.End))
+/*        if (Input.GetKeyDown(KeyCode.End))
             StartTable();
         if (Input.GetKeyDown(KeyCode.UpArrow))
             End_PlayerTurn();
         if (Input.GetKeyDown(KeyCode.DownArrow))
-            End_TableTurn();
+            End_TableTurn();*/
     }
 
 
@@ -83,6 +91,7 @@ public class TableManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator corFunc_RollTable()
     {
+        DrawPannel();
 
         for (int i = 0; i < maxTurn; i++)
         {
@@ -91,7 +100,7 @@ public class TableManager : MonoBehaviour
             for (int j = 0; j < maxPlayer; j++)
             {
                 nowPlayerTurn = j;
-                Debug.Log("Now Player : " + j);
+                DrawPannel();
 
                 //플레이어 턴 실행
                 Run_PlayerTurn(j);
@@ -105,6 +114,7 @@ public class TableManager : MonoBehaviour
                 playerAfterTurnEnd = false;
 
 
+                DrawPannel();
             }
 
             //테이블 자체에 어떠한 효과가 나와야 한다면 호출
@@ -128,6 +138,18 @@ public class TableManager : MonoBehaviour
     // 다음 플레이어에게 넘긴다.
     // 반복
 
+    private void DrawPannel()
+    {
+        bool tmp = false;
+        for (int i = 0; i < 4; i++)
+        {
+            if (i == nowPlayerTurn)
+                tmp = true;
+            else
+                tmp = false;
+            testPointPanel[i].DrawInfo(tmp, listPlayer[i].Resource);
+        }
+    }
 
     /// <summary>
     /// 해당하는 플레이어 턴을 실행한다.
@@ -151,9 +173,12 @@ public class TableManager : MonoBehaviour
     {
         //플레이어의 재화 확보
 
+        listPlayer[nowPlayerTurn].EndTurn();
 
         //마켓 충당
         CardManager.instance.Add_Market();
+
+        End_AfterPlayerTurn();
 
     }
 
@@ -163,6 +188,7 @@ public class TableManager : MonoBehaviour
     private void Run_TableTurn()
     {
         //테이블 턴 시작시 함수 호출
+        End_TableTurn();
     }
 
     /// <summary>
@@ -170,26 +196,35 @@ public class TableManager : MonoBehaviour
     /// </summary>
     private void Run_AfterTableTurn()
     {
-
         //테이블 턴 종료시의 함수 호출
-
+        End_AfterTableTurn();
     }
 
     /// <summary>
     /// 플레이어의 턴 종료시 호출해야 합니다.
     /// </summary>
 
-    private void End_PlayerTurn()
+    public void End_PlayerTurn()
     {
         playerTurnEnd = true;
     }
-    
+
+    public void End_AfterPlayerTurn()
+    {
+        playerAfterTurnEnd = true;
+    }
+
     /// <summary>
     /// 테이블의 턴 종료시 호출되어야 합니다.
     /// </summary>
     public void End_TableTurn()
     {
         TableTurnEnd = true;
+    }
+
+    public void End_AfterTableTurn()
+    {
+        TableAfterTurnEnd = true;
     }
 
     public int Get_NowPlayer()
