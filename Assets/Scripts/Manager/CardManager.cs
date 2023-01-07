@@ -37,13 +37,13 @@ public class CardManager : MonoBehaviour
 
     private void Update()
     {
-        //if(Input.GetKeyDown(KeyCode.I))
+/*        //if(Input.GetKeyDown(KeyCode.I))
         //    Initialize();
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //테스트 소모
             TestSpendCard();
-        }
+        }*/
     }
 
     /// <summary>
@@ -156,13 +156,14 @@ public class CardManager : MonoBehaviour
         //발견한 인덱스의 카드를 마켓에서 제거하고 리턴
         tmpCard = listMarketCardGO[tmpindex];
         listMarketCardGO.RemoveAt(tmpindex);
+        listMarketCardCS[tmpindex].IsPurchased = true;
         listMarketCardCS.RemoveAt(tmpindex);
 
         Add_Market();
         RePosition_MarketCard();
 
         //임시 카드 이동
-        tmpCard.transform.DOMove(new Vector2(100, 0),1f);
+        //tmpCard.transform.DOMove(new Vector2(100, 0),1f);
 
         return tmpCard;
     }
