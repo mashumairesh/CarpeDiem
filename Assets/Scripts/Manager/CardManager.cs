@@ -129,6 +129,9 @@ public class CardManager : MonoBehaviour
                     listMarketCardCS.Add(tmpG.GetComponent<CardScript>());
                 }
             }
+
+
+
     }
 
     /// <summary>
@@ -178,14 +181,32 @@ public class CardManager : MonoBehaviour
     /// </summary>
     private void RePosition_MarketCard()
     {
-        if (listMarketHolder.Count != marketMax)
-            Debug.LogError("!!Position Count unMatched MarketMax!!");
-        for(int i = 0; i < listMarketCardGO.Count; i++)
+        /*        if (listMarketHolder.Count != marketMax)
+                    Debug.LogError("!!Position Count unMatched MarketMax!!");
+                for(int i = 0; i < listMarketCardGO.Count; i++)
+                {
+                    //위치 변경
+                    listMarketCardGO[i].transform.DOMove(listMarketHolder[i].transform.position, 0.3f);
+                }*/
+
+        //리포지션 변경
+        //listMarketHolder의 첫 인덱스와 끝 인덱스를 참조하여 카드들을 내부에 자동 정렬.
+
+        float Length = ((listMarketHolder[listMarketHolder.Count - 1].transform.position.x - listMarketHolder[0].transform.position.x) / 9f);
+        Vector3 VecOrg = listMarketHolder[0].transform.position;
+        Vector3 tmpVec = listMarketHolder[0].transform.position;
+        for (int i = 0; i < marketMax; i++)
         {
-            //위치 변경
-            listMarketCardGO[i].transform.DOMove(listMarketHolder[i].transform.position, 0.3f);
-            //listMarketCardGO[i].transform.position = listMarketHolder[i].transform.position;
+            //1. Transform 을 기준으로     + ( ( ( (2)B-(1)A ) / (Max - 1) ) * i )
+
+            tmpVec = VecOrg;
+            tmpVec.x += (Length * (float)i);
+            listMarketCardGO[i].transform.DOMove(
+                ( tmpVec )
+                , 0.3f);
+
         }
+
     }
 
     /// <summary>
