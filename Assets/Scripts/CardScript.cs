@@ -32,6 +32,7 @@ public class CardScript : MonoBehaviour
             ReqTexts[i].text = cardData.Price[i].ToString();
             EffectTexts[i].text = cardData.Effect[i].ToString();
         }
+        TurnText.text = cardData.Turn.ToString();
 
     }
     public void OnMouseEnter()
