@@ -50,6 +50,9 @@ public class CardManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 카드 리스트를 만들어 혹은 카드 리스트들을 받아와 마켓에 추가합니다.
+    /// </summary>
     private void GenerationCardList()
     {
         //테스트 생성
@@ -84,7 +87,9 @@ public class CardManager : MonoBehaviour
             RePosition_MarketCard();
         }
     }
-
+    /// <summary>
+    /// 자신이 가진 모든 카드 리스트를 기반으로 가장 첫번째 인덱스의 카드를 마켓에 추가합니다.
+    /// </summary>
     private void Add_Market()
     {
         int tmp = marketMax - listMarketCardGO.Count;
@@ -102,10 +107,33 @@ public class CardManager : MonoBehaviour
     }
 
 
-
-    private GameObject Get_MarketCard(int rsh)
+    /// <summary>
+    /// 마켓에서부터 카드를 가져옵니다.
+    /// </summary>
+    /// <param name="CardCode">카드번호 입니다.</param>
+    /// <returns></returns>
+    public GameObject Get_MarketCard(int CardCode)
     {
-        return listMarketCardGO[rsh];
+        GameObject tmpCard;
+        int tmpindex = 99999;
+
+        //선택한 카드 번호를 list에 존재하는지 찾고 해당 리스트 인덱스를 저장
+        for (int i = 0; i < listMarketCardGO.Count; i++)
+            if (listMarketCardCO[i].GetCardNum() == CardCode)
+                tmpindex = i;
+                //발견시 저장
+
+        if(tmpindex == 99999)
+        {
+            Debug.LogError("Get_MarketCard : NO IN HAS MARKET!!");
+            return null;
+        }
+
+        //발견한 인덱스의 카드를 마켓에서 제거하고 리턴
+        tmpCard = listMarketCardGO[tmpindex];
+        listMarketCardGO.RemoveAt(tmpindex);
+        listMarketCardCO.RemoveAt(tmpindex);
+        return tmpCard;
     }
 
     /// <summary>
@@ -150,7 +178,7 @@ public class CardManager : MonoBehaviour
 
 
     /// <summary>
-    /// 카드 구매 가능 여부
+    /// 카드 구매 가능 여부를 리턴합니다
     /// </summary>
     /// <param name="cardNum">선택한 카드 번호</param>
     /// <param name="Happy">플레이어측 재화</param>
