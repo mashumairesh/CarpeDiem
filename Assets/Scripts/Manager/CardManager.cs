@@ -11,7 +11,7 @@ public class CardManager : MonoBehaviour
 
     [SerializeField] private int marketMax; //마켓에 최대로 들어갈 수 있는 카드의 갯수
     private List<GameObject> listMarketCardGO;//마켓 카드 리스트
-    private List<CardObject> listMarketCardCO;//마켓 카드 리스트
+    private List<CardScript> listMarketCardCS;//마켓 카드 리스트
 
     private List<List<GameObject>> listPlayerCard;  //플레이어들이 가진 카드 리스트
 
@@ -44,7 +44,7 @@ public class CardManager : MonoBehaviour
     {
         listGenCard = new List<GameObject>();
         listMarketCardGO = new List<GameObject>();
-        listMarketCardCO = new List<CardObject>();
+        listMarketCardCS = new List<CardScript>();
 
         GenerationCardList();
 
@@ -101,7 +101,7 @@ public class CardManager : MonoBehaviour
                 if (tmpG != null)
                 {
                     listMarketCardGO.Add(tmpG);
-                    listMarketCardCO.Add(tmpG.GetComponent<CardObject>());
+                    listMarketCardCS.Add(tmpG.GetComponent<CardScript>());
                 }
             }
     }
@@ -119,7 +119,7 @@ public class CardManager : MonoBehaviour
 
         //선택한 카드 번호를 list에 존재하는지 찾고 해당 리스트 인덱스를 저장
         for (int i = 0; i < listMarketCardGO.Count; i++)
-            if (listMarketCardCO[i].GetCardNum() == CardCode)
+            if (listMarketCardCS[i].GetCardNum() == CardCode)
                 tmpindex = i;
                 //발견시 저장
 
@@ -132,7 +132,7 @@ public class CardManager : MonoBehaviour
         //발견한 인덱스의 카드를 마켓에서 제거하고 리턴
         tmpCard = listMarketCardGO[tmpindex];
         listMarketCardGO.RemoveAt(tmpindex);
-        listMarketCardCO.RemoveAt(tmpindex);
+        listMarketCardCS.RemoveAt(tmpindex);
         return tmpCard;
     }
 
@@ -190,9 +190,9 @@ public class CardManager : MonoBehaviour
         //list Market Card 에서 카드 번호를 순회한 뒤 해당하는 항목과 가격비교
         for (int i = 0; i < listMarketCardGO.Count; i++)
             //카드 번호가 동일함. 구매 가능 여부 확인
-            if (listMarketCardCO[i].GetCardNum() == cardNum)
+            if (listMarketCardCS[i].GetCardNum() == cardNum)
             {
-                tmpPrice = listMarketCardCO[i].GetPrice();
+                tmpPrice = listMarketCardCS[i].GetPrice();
                 for (int j = 0; j < 5; j++)
                 {
                     if (tmpPrice[j] + tmpPrice[j + 5] <= Happy[j])
