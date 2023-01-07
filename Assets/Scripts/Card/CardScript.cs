@@ -32,7 +32,7 @@ public class CardScript : MonoBehaviour
         this._cardData = from;
         for (int i = 0; i < 5; i++)
         {
-            ReqTexts[i].text = _cardData.Price[i].ToString();
+            ReqTexts[i].text = _cardData.Price[i] > 1000000 ? "X" : _cardData.Price[i].ToString();
             EffectTexts[i].text = _cardData.Effect[i].ToString();
         }
         TurnText.text = _cardData.Turn.ToString();
@@ -59,7 +59,7 @@ public class CardScript : MonoBehaviour
     public void OnMouseDown()
     {
         if (!isPurchased)
-            CardManager.instance.Check_BuyThisCard(this._cardData.CardNum, TableManager.instance.Get_NowPlayerResource());
+            UIManager.instance.Popup_PurchaseUI(this._cardData.CardNum, CardManager.instance.Check_BuyThisCard(this._cardData.CardNum, TableManager.instance.Get_NowPlayerResource()),this._cardData.Price);
         else
             TableManager.instance.Get_NowPlayerScript().RemoveCard(gameObject);
     }
@@ -75,10 +75,7 @@ public class CardScript : MonoBehaviour
     {
         return _cardData.Effect;
     }
-    public int GetTurn()
-    {
-        return _cardData.Turn;
-    }
+    public int TurnLeft { get => turnLeft; set => turnLeft = value; }
     public int GetSlot()
     {
         return _cardData.Slot;

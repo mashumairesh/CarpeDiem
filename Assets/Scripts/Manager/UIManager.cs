@@ -7,6 +7,7 @@ using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager instance;
 
     [SerializeField] private RectTransform ShoppingPannel;
     
@@ -15,8 +16,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] private List<TextMeshProUGUI> ShoppingText;
     [SerializeField] private List<int> ShoppingTextResource;
 
+    [SerializeField] private int CardNum;
+
     [SerializeField] private List<bool> testBool;
     [SerializeField] private List<int> testInt;
+
+    private void OnEnable()
+    {
+        if (instance == null)
+            instance = this;
+    }
 
     private void Update()
     {
@@ -26,20 +35,28 @@ public class UIManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            Popdown_PurchaseUI();
+            Popdown_PurchaseUI(0);
         }
     }
 
-    public void Popup_PurchaseUI(int CardNum, List<bool> Able, List<int> resource)
+    public void Popup_PurchaseUI(int cardNum, List<bool> Able, List<int> resource)
     {
+        CardNum = cardNum;
         ShoppingButtonAble = Able;
         ShoppingTextResource = resource;
         StartCoroutine(corFunc_PopupPurchaseUI());
     }
 
-    public void Popdown_PurchaseUI()
+    public void Popdown_PurchaseUI(int rsh)
     {
+        List<int> tmp = new List<int>();
+        for (int i = 0; i < 5; i++) tmp.Add(0);
+        tmp[rsh] = ShoppingTextResource[rsh] + ShoppingTextResource[rsh + 5];
         StartCoroutine(corFunc_PopDownPurchaseUI());
+
+        CardManager.instance.Get_MarketCard(CardNum);
+        TableManager.instance.Get_NowPlayerScript().Use(tmp);
+
     }
 
     public void ButtonClose()
