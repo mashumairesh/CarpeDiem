@@ -100,7 +100,9 @@ public class Player : MonoBehaviour
         List<GameObject> deleteTargets = new List<GameObject>();
         foreach(var card in _fields)
         {
-            if (--(card.GetComponent<CardScript>().TurnLeft) == 0)
+            CardScript cs = card.GetComponent<CardScript>();
+            this.Gain(cs.GetEffect());
+            if (--(cs.TurnLeft) == 0)
                 deleteTargets.Add(card);
         }
         foreach (var target in deleteTargets)
