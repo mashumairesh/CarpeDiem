@@ -157,6 +157,11 @@ public class CardManager : MonoBehaviour
         tmpCard = listMarketCardGO[tmpindex];
         listMarketCardGO.RemoveAt(tmpindex);
         listMarketCardCS[tmpindex].IsPurchased = true;
+        if(listMarketCardCS[tmpindex].GetEffect()[5] == 1 )
+        {
+            Debug.Log("END CARD");
+            //TableManager에 ThisEndCard 라는 것을 알리는 함수를 호출
+        }
         listMarketCardCS.RemoveAt(tmpindex);
 
         Add_Market();

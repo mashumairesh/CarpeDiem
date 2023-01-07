@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
-using Unity.VisualScripting;
 
 public class UIManager : MonoBehaviour
 {
@@ -12,8 +11,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private RectTransform ShoppingPannel;
     [SerializeField] private GameObject ShoppingClickBlocker;
+    [SerializeField] private GameObject ShoppingWorldClickBlocker;
     [SerializeField] private GameObject ShoppingBreaker;
-    
+
     [SerializeField] private List<Button> ShoppingButton;
     [SerializeField] private List<bool> ShoppingButtonAble;
     [SerializeField] private List<TextMeshProUGUI> ShoppingText;
@@ -23,7 +23,6 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private List<bool> testBool;
     [SerializeField] private List<int> testInt;
-
 
     private void OnEnable()
     {
@@ -45,10 +44,13 @@ public class UIManager : MonoBehaviour
 
     public void Popup_PurchaseUI(int cardNum, List<bool> Able, List<int> resource)
     {
+        ShoppingClickBlocker.SetActive(true);
+        ShoppingWorldClickBlocker.SetActive(true);
+
         CardNum = cardNum;
         ShoppingButtonAble = Able;
         ShoppingTextResource = resource;
-        StartCoroutine(corFunc_PopupPurchaseUI()); 
+        StartCoroutine(corFunc_PopupPurchaseUI());
         for (int i = 0; i < ShoppingButton.Count; i++)
         {
             if (ShoppingTextResource[i] < 99999)
@@ -91,13 +93,12 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator corFunc_PopupPurchaseUI()
     {
-        ShoppingClickBlocker.SetActive(true);
         ButtonClose();
         ShoppingPannel.DOMoveY(1080 * 2, 0f);
         ShoppingPannel.gameObject.SetActive(true);
-        ShoppingPannel.DOMoveY(1080 / 2f, 1f).SetEase(Ease.InOutBack);
+        ShoppingPannel.DOMoveY(1080 / 2f, 0.5f).SetEase(Ease.InOutBack);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         ShoppingBreaker.SetActive(true);
 
@@ -112,12 +113,13 @@ public class UIManager : MonoBehaviour
         ButtonClose();
         ShoppingBreaker.SetActive(false);
         ShoppingPannel.gameObject.SetActive(true);
-        ShoppingPannel.DOMoveY(1080 * 2f, 1f).SetEase(Ease.InOutBack);
+        ShoppingPannel.DOMoveY(1080 * 2f, 0.5f).SetEase(Ease.InOutBack);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         ShoppingPannel.gameObject.SetActive(false);
         ShoppingClickBlocker.SetActive(false);
+        ShoppingWorldClickBlocker.SetActive(false);
     }
 
 }
