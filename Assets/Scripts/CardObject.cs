@@ -3,37 +3,60 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class CardObject : MonoBehaviour
 {
 
-    [SerializeField] private Image image;
-    [SerializeField] private CardData cardData;
-    public CardData CardData { get => cardData; set => cardData = value; }
-
-
-    public List<TextMeshProUGUI> costText;
-    public List<TextMeshProUGUI> EffectText;
-
-    public void Set_Values(List<int> tmp)
+    [SerializeField] private Image _image;
+    [SerializeField] private CardData _cardData;
+    
+    public CardObject (int cardNum, List<int> price, List<int> effect, int turn, int slot)
     {
-
+        _cardData.CardNum = cardNum;
+        _cardData.Price = price;
+        _cardData.Effect = effect;
+        _cardData.Turn = turn;
+        _cardData.Slot = slot;
+        _cardData.isControlAble = true;
     }
-
+    private int GetCardNum()
+    {
+        return _cardData.CardNum;
+    }
+    private List<int> GetPrice()
+    {
+        return _cardData.Price;
+    }
+    private List<int> GetEffect()
+    {
+        return _cardData.Effect;
+    }
+    private int GetTurn()
+    {
+        return _cardData.Turn;
+    }
+    private int GetSlot()
+    {
+        return _cardData.Slot;
+    }
+    private bool GetCA()
+    {
+        return _cardData.isControlAble;
+    }
+    private void Puchased()
+    {
+        _cardData.isControlAble = false;
+    }
 }
 
 [System.Serializable]
 public class CardData
 {
-    [SerializeField] private int cardNum;
-    [SerializeField] private List<int> price; //[10]
-    [SerializeField] private List<int> effect; //[7]
-    [SerializeField] private int turn;
-    [SerializeField] private int slot;
-
-    public int CardNum { get => cardNum; set => cardNum = value; }
-    public List<int> Price { get => price; set => price = value; }
-    public List<int> Effect { get => effect; set => effect = value; }
-    public int Turn { get => turn; set => turn = value; }
-    public int Slot { get => slot; set => slot = value; }
+    public int CardNum;
+    public List<int> Price; //[10]
+    public List<int> Effect; //[7]
+    public int Turn;
+    public int Slot;
+    public bool isControlAble;
 }
