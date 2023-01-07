@@ -9,8 +9,8 @@ public class PublicTable : MonoBehaviour
 
     void AddformDeck()
     {
-        CardScript newcard = new CardScript;
+/*        CardScript newcard = new CardScript;
         newcard.Initalize(_deck.Draw());
-        _cards.Add();
+        _cards.Add();*/
     }
 }
