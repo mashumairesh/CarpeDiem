@@ -32,7 +32,7 @@ public class CardScript : MonoBehaviour
         this._cardData = from;
         for (int i = 0; i < 5; i++)
         {
-            ReqTexts[i].text = _cardData.Price[i].ToString();
+            ReqTexts[i].text = _cardData.Price[i] > 1000000 ? "X" : _cardData.Price[i].ToString();
             EffectTexts[i].text = _cardData.Effect[i].ToString();
         }
         TurnText.text = _cardData.Turn.ToString();
