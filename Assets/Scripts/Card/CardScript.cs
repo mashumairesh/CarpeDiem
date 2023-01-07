@@ -41,7 +41,7 @@ public class CardScript : MonoBehaviour
     }
     public void OnMouseEnter()
     {
-        if (!isControlAble) return;
+        //if (!isControlAble) return;
         targetScale = originScale * scaleMultiplier;
         transform.Translate(Vector3.back * 0.25f);
     }
@@ -87,6 +87,6 @@ public class CardScript : MonoBehaviour
 
     public void PurChase()
     {
-        isControlAble = true;
+        isControlAble = false;
     }
 }

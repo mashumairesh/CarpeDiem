@@ -695,7 +695,7 @@ MonoBehaviour:
   - {fileID: 6922648176772943261}
   - {fileID: 7363540703886790401}
   TurnText: {fileID: 4800187969244211541}
-  scaleMultiplier: 0.23
+  scaleMultiplier: 2.5
 --- !u!1 &2705161190966929717
 GameObject:
   m_ObjectHideFlags: 0
