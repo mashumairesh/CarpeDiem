@@ -8,7 +8,10 @@ public class CardScript : MonoBehaviour
     public TextMeshPro[] ReqTexts;
     public TextMeshPro[] EffectTexts;
     public TextMeshPro TurnText;
-    private CardData cardData;
+    public float scaleMultiplier;
+    private CardData _cardData;
+    bool isControlAble;
+    int turnLeft;
     float targetScale;
     float originScale;
     Vector3 velocity;
@@ -24,23 +27,28 @@ public class CardScript : MonoBehaviour
         transform.localScale = Vector3.SmoothDamp(transform.localScale, new Vector3(targetScale, targetScale, 1.0f), ref velocity, 0.3f);
     }
 
-    public void SetCardData(CardData from)
+    public void Initalize(CardData from)
     {
-        this.cardData = from;
+        this._cardData = from;
         for (int i = 0; i < 5; i++)
         {
-            ReqTexts[i].text = cardData.Price[i].ToString();
-            EffectTexts[i].text = cardData.Effect[i].ToString();
+            ReqTexts[i].text = _cardData.Price[i].ToString();
+            EffectTexts[i].text = _cardData.Effect[i].ToString();
         }
-        TurnText.text = cardData.Turn.ToString();
-
+        TurnText.text = _cardData.Turn.ToString();
+        isControlAble = true;
+        turnLeft = _cardData.Turn;
     }
     public void OnMouseEnter()
     {
-        targetScale = originScale * 3.0f;
+        targetScale = originScale * scaleMultiplier;
         transform.Translate(Vector3.back * 0.25f);
     }
-
+    public bool execute()
+    {
+        turnLeft--;
+        return turnLeft == 0;
+    }
     public void OnMouseExit()
     {
         targetScale = originScale;
@@ -49,6 +57,30 @@ public class CardScript : MonoBehaviour
 
     public void OnMouseDown()
     {
-
+        
+    }
+    public int GetCardNum()
+    {
+        return _cardData.CardNum;
+    }
+    public List<int> GetPrice()
+    {
+        return _cardData.Price;
+    }
+    public List<int> GetEffect()
+    {
+        return _cardData.Effect;
+    }
+    public int GetTurn()
+    {
+        return _cardData.Turn;
+    }
+    public int GetSlot()
+    {
+        return _cardData.Slot;
+    }
+    public bool GetCA()
+    {
+        return _cardData.isControlAble;
     }
 }
