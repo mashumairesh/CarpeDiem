@@ -27,9 +27,11 @@ public class TableManager : MonoBehaviour
     [SerializeField] private bool TableTurnEnd;
     [SerializeField] private bool TableAfterTurnEnd;
 
+    [SerializeField] private List<Player> listPlayer;
 
     [SerializeField] private TextMeshProUGUI tmpSpendTurn;  //지난 턴
     [SerializeField] private TextMeshProUGUI tmpLimitTurn;  //최대 턴
+
 
     private bool hasInit = false;
 
@@ -195,6 +197,12 @@ public class TableManager : MonoBehaviour
         return nowPlayerTurn;
     }
 
+    public List<int> Get_NowPlayerResource()
+    {
+
+        return listPlayer[nowPlayerTurn].Resource;
+
+    }
 
 
 
