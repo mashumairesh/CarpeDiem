@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
-
+using DG.Tweening;
 public class Player : MonoBehaviour
 {
     private int _order;            // 플레이 순서
@@ -68,7 +68,8 @@ public class Player : MonoBehaviour
         slotUsed += newcard.GetComponent<CardScript>().GetSlot();
         int index = _fields.Count-1;
         _fields[index].transform.parent = transform;
-        _fields[index].transform.localPosition = Vector3.right * cardGap * index;
+        _fields[index].transform.DOLocalMove(Vector3.right * cardGap * index, 0.5f);
+        //Debug.Log(_fields[index].transform.localPosition);
     }
 
     /// <summary>

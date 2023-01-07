@@ -53,11 +53,6 @@ public class CardScript : MonoBehaviour
         before.z = targetZ;
         transform.localPosition = before;
     }
-    public bool execute()
-    {
-        turnLeft--;
-        return turnLeft == 0;
-    }
     public void OnMouseExit()
     {
         targetScale = originScale;
@@ -83,7 +78,15 @@ public class CardScript : MonoBehaviour
     {
         return _cardData.Effect;
     }
-    public int TurnLeft { get => turnLeft; set => turnLeft = value; }
+    public int TurnLeft
+    {
+        get => turnLeft; 
+        set
+        {
+            turnLeft = value;
+            TurnText.text = turnLeft.ToString();
+        }
+    }
     public int GetSlot()
     {
         return _cardData.Slot;
