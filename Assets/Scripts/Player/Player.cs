@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     {
         for (int i = 0; i < used.Count; i++)
         {
-            _resource[i] += used[i];
+            _resource[i] -= used[i];
         }
     }
 
@@ -54,22 +54,21 @@ public class Player : MonoBehaviour
         }
     }
 
-    public int Getscore()
+    public int GetScore()
     {
         _finalscore = _Happy[_scorehappy];
         return _finalscore;
     }
 
-// Start is called before the first frame update
-void Start()
-    {
+    // Start is called before the first frame update
+    void Start()
+        {
         
-    }
+        }
 
     // Update is called once per frame
     void Update()
     {
         
     }
-
 }

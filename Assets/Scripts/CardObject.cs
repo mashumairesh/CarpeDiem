@@ -20,31 +20,31 @@ public class CardObject : MonoBehaviour
         _cardData.Slot = slot;
         _cardData.isControlAble = true;
     }
-    private int GetCardNum()
+    public int GetCardNum()
     {
         return _cardData.CardNum;
     }
-    private List<int> GetPrice()
+    public List<int> GetPrice()
     {
         return _cardData.Price;
     }
-    private List<int> GetEffect()
+    public List<int> GetEffect()
     {
         return _cardData.Effect;
     }
-    private int GetTurn()
+    public int GetTurn()
     {
         return _cardData.Turn;
     }
-    private int GetSlot()
+    public int GetSlot()
     {
         return _cardData.Slot;
     }
-    private bool GetCA()
+    public bool GetCA()
     {
         return _cardData.isControlAble;
     }
-    private void Puchased()
+    public void Puchased()
     {
         _cardData.isControlAble = false;
     }
