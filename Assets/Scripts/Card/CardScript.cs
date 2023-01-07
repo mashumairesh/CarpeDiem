@@ -12,19 +12,23 @@ public class CardScript : MonoBehaviour
     private CardData _cardData;
     bool isPurchased;
     int turnLeft;
-    float targetScale;
-    float originScale;
-    Vector3 velocity;
+    float targetScale, originScale;
+    float targetZ, originZ;
+    Vector3 v1, v2;
     // Start is called before the first frame update
     void Start()
     {
         targetScale = originScale = transform.localScale.x;
+        targetZ = originZ = transform.localPosition.z;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.localScale = Vector3.SmoothDamp(transform.localScale, new Vector3(targetScale, targetScale, 1.0f), ref velocity, 0.3f);
+        transform.localScale = Vector3.SmoothDamp(transform.localScale, new Vector3(targetScale, targetScale, 1.0f), ref v1, 0.3f);
+        Vector3 targetPos = transform.localPosition;
+        targetPos.z = targetZ;
+        transform.localPosition = Vector3.SmoothDamp(transform.localPosition, targetPos, ref v2, 0.3f);
     }
 
     public void Initalize(CardData from)
@@ -44,7 +48,10 @@ public class CardScript : MonoBehaviour
     {
         //if (!isControlAble) return;
         targetScale = originScale * scaleMultiplier;
-        transform.Translate(Vector3.back * 0.25f);
+        targetZ = originZ - 0.25f;
+        Vector3 before = transform.localPosition;
+        before.z = targetZ;
+        transform.localPosition = before;
     }
     public bool execute()
     {
@@ -54,7 +61,7 @@ public class CardScript : MonoBehaviour
     public void OnMouseExit()
     {
         targetScale = originScale;
-        transform.Translate(Vector3.forward * 0.25f);
+        targetZ = originZ;
     }
 
     public void OnMouseDown()
