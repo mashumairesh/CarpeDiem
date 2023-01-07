@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// 테이블의 진행을 관리하는 메니저입니다.
@@ -16,10 +18,20 @@ public class TableManager : MonoBehaviour
     [Tooltip("최대 턴 횟수 입니다.")]
     [SerializeField] private int maxTurn;
 
+    [Tooltip("4명을 ? 혹은 2인을 기준으로 제작")]
     [SerializeField] private int maxPlayer;
     [SerializeField] private int nowPlayerTurn;
 
-    [SerializeField] private bool turnEnd;
+    [SerializeField] private bool playerTurnEnd;
+    [SerializeField] private bool playerAfterTurnEnd;
+    [SerializeField] private bool TableTurnEnd;
+    [SerializeField] private bool TableAfterTurnEnd;
+
+
+    [SerializeField] private TextMeshProUGUI tmpSpendTurn;  //지난 턴
+    [SerializeField] private TextMeshProUGUI tmpLimitTurn;  //최대 턴
+
+    private bool hasInit = false;
 
     private void OnEnable()
     {
@@ -29,13 +41,19 @@ public class TableManager : MonoBehaviour
 
     private void Awake()
     {
-        Initialize();
+        if (!hasInit)
+            Initialize();
     }
 
     private void Initialize()
     {
+        hasInit = true;
+
         nowPlayerTurn = 0;
-        turnEnd = false;
+        playerTurnEnd = false;
+        playerAfterTurnEnd = false;
+        TableTurnEnd = false;
+        TableAfterTurnEnd = false;
     }
 
     /// <summary>
@@ -50,8 +68,10 @@ public class TableManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.End))
             StartTable();
-        if (Input.GetKeyDown(KeyCode.Space))
-            turnEnd = true;
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+            End_PlayerTurn();
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+            End_TableTurn();
     }
 
 
@@ -73,13 +93,29 @@ public class TableManager : MonoBehaviour
                 //플레이어 턴 실행
                 Run_PlayerTurn(j);
 
-                yield return new WaitUntil(() => turnEnd == true);
-                turnEnd = false;
+                yield return new WaitUntil(() => playerTurnEnd == true);
+                playerTurnEnd = false;
 
+                Run_AfterPlayerTurn(j);
 
+                yield return new WaitUntil(() => playerAfterTurnEnd == true);
+                playerAfterTurnEnd = false;
 
 
             }
+
+            //테이블 자체에 어떠한 효과가 나와야 한다면 호출
+            Run_TableTurn();
+
+            yield return new WaitUntil(() => TableTurnEnd == true);
+            TableTurnEnd = false;
+
+            //테이블 턴이 끝날시에 호출
+            Run_AfterTableTurn();
+
+            yield return new WaitUntil(() => TableAfterTurnEnd == true);
+            TableTurnEnd = false;
+
         }
     }
 
@@ -91,16 +127,65 @@ public class TableManager : MonoBehaviour
 
 
     /// <summary>
-    /// 플레이어 턴을 실행한다.
+    /// 해당하는 플레이어 턴을 실행한다.
     /// </summary>
     /// <param name="rsh"></param>
-    public void Run_PlayerTurn(int rsh)
+    private void Run_PlayerTurn(int rsh)
     {
-
-        //rsh를 기반으로 하위 실질적으로 동작이 필요한 오브젝트들에게 턴 동작을 하게 만든다.
+        //실행 부분
+        //플레이어의 제어권 확보
 
 
     }
+
+
+    /// <summary>
+    /// 플레이어의 턴이 종료된 뒤 실행됩니다.
+    /// 카드의 정렬 추가 이런것들이 필요하며
+    /// </summary>
+    /// <param name="rsh"></param>
+    private void Run_AfterPlayerTurn(int rsh)
+    {
+        //플레이어의 재화 확보
+
+
+    }
+
+    /// <summary>
+    /// 테이블 턴이 시작될 때 호출
+    /// </summary>
+    private void Run_TableTurn()
+    {
+        //테이블 턴 시작시 함수 호출
+    }
+
+    /// <summary>
+    /// 테이블 턴이 종료될 떄 호출
+    /// </summary>
+    private void Run_AfterTableTurn()
+    {
+
+        //테이블 턴 종료시의 함수 호출
+
+    }
+
+    /// <summary>
+    /// 플레이어의 턴 종료시 호출해야 합니다.
+    /// </summary>
+
+    private void End_PlayerTurn()
+    {
+        playerTurnEnd = true;
+    }
+    
+    /// <summary>
+    /// 테이블의 턴 종료시 호출되어야 합니다.
+    /// </summary>
+    public void End_TableTurn()
+    {
+        TableTurnEnd = true;
+    }
+
 
 
 
