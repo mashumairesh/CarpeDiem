@@ -18,6 +18,7 @@ public class CardManager : MonoBehaviour
 
     [SerializeField] private List<Transform> listMarketHolder;   //마켓에 카드가 들어갈 홀더
     [SerializeField] private Deck deck;     //덱...
+    [SerializeField] private bool CheckBuyFst;
 
     [SerializeField] private GameObject TestCard;
     [SerializeField] private int TestAmount;
@@ -54,7 +55,7 @@ public class CardManager : MonoBehaviour
         listGenCard = new List<GameObject>();
         listMarketCardGO = new List<GameObject>();
         listMarketCardCS = new List<CardScript>();
-
+        CheckBuyFst = false;
         GenerationCardList();
 
     }
@@ -76,6 +77,10 @@ public class CardManager : MonoBehaviour
         //마켓 카드 홀더를 우선 초기화 해야함.
         //인스펙터에 넣을지 동적으로 생성되는 홀더를 가져오게 할지
         //...
+
+        //1번칸의 구매 여부를 확인
+        
+
         RePosition_MarketCard();
 
     }
@@ -148,9 +153,12 @@ public class CardManager : MonoBehaviour
         for (int i = 0; i < listMarketCardGO.Count; i++)
             if (listMarketCardCS[i].GetCardNum() == cardNum)
                 tmpindex = i;
-                //발견시 저장
+        //발견시 저장
 
-        if(tmpindex == 99999)
+        if (tmpindex == 0)
+            CheckBuyFst = true;
+
+        if (tmpindex == 99999)
         {
             Debug.LogError("Get_MarketCard : NO IN HAS MARKET!!");
             return null;
@@ -164,6 +172,7 @@ public class CardManager : MonoBehaviour
         {
             Debug.Log("END CARD");
             //TableManager에 ThisEndCard 라는 것을 알리는 함수를 호출
+            TableManager.instance.increaseCEC();
         }
         listMarketCardCS.RemoveAt(tmpindex);
 
@@ -181,14 +190,6 @@ public class CardManager : MonoBehaviour
     /// </summary>
     private void RePosition_MarketCard()
     {
-        /*        if (listMarketHolder.Count != marketMax)
-                    Debug.LogError("!!Position Count unMatched MarketMax!!");
-                for(int i = 0; i < listMarketCardGO.Count; i++)
-                {
-                    //위치 변경
-                    listMarketCardGO[i].transform.DOMove(listMarketHolder[i].transform.position, 0.3f);
-                }*/
-
         //리포지션 변경
         //listMarketHolder의 첫 인덱스와 끝 인덱스를 참조하여 카드들을 내부에 자동 정렬.
 
@@ -273,6 +274,29 @@ public class CardManager : MonoBehaviour
 
         return buyAble;
 
+    }
+
+    public void CheckBuyFirst()
+    {
+        if(!CheckBuyFst)
+        {
+            GameObject tmpCard;
+            tmpCard = listMarketCardGO[0];
+            listMarketCardGO.RemoveAt(0);
+            listMarketCardCS[0].IsPurchased = true;
+            if (listMarketCardCS[0].GetEffect()[5] == 1)
+            {
+                Debug.Log("END CARD");
+                //TableManager에 ThisEndCard 라는 것을 알리는 함수를 호출
+                TableManager.instance.increaseCEC();
+            }
+            listMarketCardCS.RemoveAt(0);
+            Destroy(tmpCard);
+        }
+        CheckBuyFst = false;
+
+        Add_Market();
+        RePosition_MarketCard();
     }
 
 }

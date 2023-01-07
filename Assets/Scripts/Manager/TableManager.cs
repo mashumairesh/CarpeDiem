@@ -190,8 +190,11 @@ public class TableManager : MonoBehaviour
         //플레이어의 재화 확보
         listPlayer[nowPlayerTurn].EndTurn();
 
+        //구매하지 않으면 제거
+        CardManager.instance.CheckBuyFirst();
+
         //마켓 충당
-        CardManager.instance.Add_Market();
+        //CardManager.instance.Add_Market();
 
         // test increase
         // increaseCEC();
