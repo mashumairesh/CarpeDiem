@@ -10,13 +10,15 @@ public class Player : MonoBehaviour
     private List<int> _resource;   // 갖고 있는 돈과 자원
     //private List<Card> _hands;   // 핸드에 있는 카드 리스트
     private List<GameObject> _fields;    // 필드에 있는 카드 리스트
-     
+    private int slotUsed;
+    public const int maxSlot = 10;
     public float cardGap;  // 카드 사이의 간격
 
     public int Order { get => _order; set => _order = value; }
     public int Scorehappy { get => _scorehappy; set => _scorehappy = value; }
     public List<int> Resource { get => _resource; set => _resource = value; }
     public List<GameObject> Fields { get => _fields; set => _fields = value; }
+    public int SlotUsed { get => slotUsed; }
 
     /// <summary>
     /// _resource와 _fields를 초기화
@@ -58,6 +60,7 @@ public class Player : MonoBehaviour
     public void AddCard(GameObject newcard) 
     {
         _fields.Add(newcard);
+        slotUsed += newcard.GetComponent<CardScript>().GetSlot();
         int index = _fields.Count-1;
         _fields[index].transform.position = gameObject.transform.position + Vector3.right * cardGap * index;
     }
@@ -82,7 +85,9 @@ public class Player : MonoBehaviour
         {
             _fields[i].transform.position = gameObject.transform.position + Vector3.right * cardGap * i;
         }
+        card.gameObject.SetActive(false);
         Destroy(card);
+        slotUsed -= card.GetComponent<CardScript>().GetSlot();
     }
 
     /// <summary>
@@ -92,7 +97,14 @@ public class Player : MonoBehaviour
     /// </summary>
     public void EndTurn()
     {
-        // ToDo
+        List<GameObject> deleteTargets = new List<GameObject>();
+        foreach(var card in _fields)
+        {
+            if (--(card.GetComponent<CardScript>().TurnLeft) == 0)
+                deleteTargets.Add(card);
+        }
+        foreach (var target in deleteTargets)
+            RemoveCard(target);
     }
 
     /// <summary>

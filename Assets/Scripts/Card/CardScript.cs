@@ -75,10 +75,7 @@ public class CardScript : MonoBehaviour
     {
         return _cardData.Effect;
     }
-    public int GetTurn()
-    {
-        return _cardData.Turn;
-    }
+    public int TurnLeft { get => turnLeft; set => turnLeft = value; }
     public int GetSlot()
     {
         return _cardData.Slot;
