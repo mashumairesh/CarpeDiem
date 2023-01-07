@@ -64,8 +64,10 @@ public class Player : MonoBehaviour
     /// <param name="newcard">추가할 카드</param>
     public void AddCard(GameObject newcard) 
     {
+        CardScript card = newcard.GetComponent<CardScript>();
         _fields.Add(newcard);
-        slotUsed += newcard.GetComponent<CardScript>().GetSlot();
+        slotUsed += card.GetSlot();
+        card.IsPurchased = true;
         int index = _fields.Count-1;
         _fields[index].transform.parent = transform;
         _fields[index].transform.DOLocalMove(Vector3.right * cardGap * index, 0.5f);
@@ -78,18 +80,20 @@ public class Player : MonoBehaviour
     /// <param name="card">제거할 카드</param>
     public void RemoveCard(GameObject card) // 
     {
+        Debug.Log("Hello");
         int cardNum = card.GetComponent<CardScript>().GetCardNum();
         int i;
+        bool found = false;
         for(i=0;i<_fields.Count;i++)
         {
             if (_fields[i].GetComponent<CardScript>().GetCardNum() == cardNum)
             {
                 _fields.RemoveAt(i);
+                found = true;
                 break;
             }
         }
-        if (i == _fields.Count)
-            return;
+        if (!found) return;
         for(; i<_fields.Count;i++)
         {
             _fields[i].transform.position = gameObject.transform.position + Vector3.right * cardGap * i;
