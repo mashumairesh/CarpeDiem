@@ -7,7 +7,7 @@ public class CardScript : MonoBehaviour
 {
     public TextMeshPro[] ReqTexts;
     public TextMeshPro[] EffectTexts;
-    public TextMeshPro TurnText;
+    public TextMeshPro TurnText, SlotText;
     public float scaleMultiplier;
     private CardData _cardData;
     bool isPurchased;
@@ -36,6 +36,7 @@ public class CardScript : MonoBehaviour
             EffectTexts[i].text = _cardData.Effect[i].ToString();
         }
         TurnText.text = _cardData.Turn.ToString();
+        SlotText.text = _cardData.Slot.ToString();
         isPurchased = false;
         turnLeft = _cardData.Turn;
     }
