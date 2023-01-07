@@ -609,7 +609,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2705161190510454607}
   - component: {fileID: 5248197333128680327}
-  - component: {fileID: 1476436652953429883}
+  - component: {fileID: 8588881401026007850}
   m_Layer: 0
   m_Name: CardPrefab
   m_TagString: Untagged
@@ -670,7 +670,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.37}
   m_EdgeRadius: 0
---- !u!114 &1476436652953429883
+--- !u!114 &8588881401026007850
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -679,10 +679,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 2705161190510454604}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Script: {fileID: 11500000, guid: 965dca0f88b62c14f9725a0614b124b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates: []
+  ReqTexts:
+  - {fileID: 2705161191428625197}
+  - {fileID: 4208568813827403051}
+  - {fileID: 4208568812901396777}
+  - {fileID: 4208568813867670168}
+  - {fileID: 4208568814672224805}
+  EffectTexts:
+  - {fileID: 6828244769005099978}
+  - {fileID: 894215829411074668}
+  - {fileID: 1191698403607162069}
+  - {fileID: 6922648176772943261}
+  - {fileID: 7363540703886790401}
+  TurnText: {fileID: 4800187969244211541}
 --- !u!1 &2705161190966929717
 GameObject:
   m_ObjectHideFlags: 0
