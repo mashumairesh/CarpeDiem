@@ -7,7 +7,8 @@ public class CardScript : MonoBehaviour
 {
     public TextMeshPro[] ReqTexts;
     public TextMeshPro[] EffectTexts;
-    public TextMeshPro TurnText, SlotText;
+    public TextMeshPro TurnText;
+    public GameObject slotObject, slotPrefab;
     public float scaleMultiplier;
     private CardData _cardData;
     bool isPurchased;
@@ -40,7 +41,12 @@ public class CardScript : MonoBehaviour
             EffectTexts[i].text = _cardData.Effect[i].ToString();
         }
         TurnText.text = _cardData.Turn.ToString();
-        SlotText.text = _cardData.Slot.ToString();
+        for(int i = 0; i < _cardData.Slot; i++)
+        {
+            var newObj = Instantiate(slotPrefab);
+            newObj.transform.parent = slotObject.transform;
+            newObj.transform.localPosition = Vector3.down * 0.15f * i;
+        }
         isPurchased = false;
         turnLeft = _cardData.Turn;
     }
