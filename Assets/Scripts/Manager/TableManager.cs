@@ -38,6 +38,7 @@ public class TableManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI TurnEndMessage;
     [SerializeField] private GameObject TurnEndBlock;
+    [SerializeField] private GameObject TurnEndBlockImg;
 
     private bool hasInit = false;
 
@@ -50,6 +51,7 @@ public class TableManager : MonoBehaviour
     private void Awake()
     {
         TurnEndBlock.SetActive(false);
+        TurnEndBlockImg.SetActive(false);
         TurnEndMessage.gameObject.SetActive(false);
         if (!hasInit)
             Initialize();
@@ -193,9 +195,11 @@ public class TableManager : MonoBehaviour
     {
         TurnEndMessage.gameObject.SetActive(true);
         TurnEndBlock.SetActive(true);
+        TurnEndBlockImg.SetActive(true);
         yield return new WaitForSeconds(2f);
         TurnEndMessage.gameObject.SetActive(false);
         TurnEndBlock.SetActive(false);
+        TurnEndBlockImg.SetActive(false);
     }
 
     /// <summary>
