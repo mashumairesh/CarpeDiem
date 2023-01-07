@@ -1044,9 +1044,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176c865c08a639a4ca5e8654e26caf92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _order: 0
   _scorehappy: 0
-  _resource: 0a0000000a0000000a0000000a0000000a000000
+  _resource: 0a0000000200000005000000010000000a000000
   cardGap: 0
 --- !u!1 &703236724
 GameObject:
@@ -1193,9 +1192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176c865c08a639a4ca5e8654e26caf92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _order: 0
   _scorehappy: 0
-  _resource: 0a0000000a0000000a0000000a0000000a000000
+  _resource: 0a0000000200000005000000010000000a000000
   cardGap: 0
 --- !u!1 &895338765
 GameObject:
@@ -1864,9 +1862,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176c865c08a639a4ca5e8654e26caf92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _order: 0
   _scorehappy: 0
-  _resource: 0a0000000a0000000a0000000a0000000a000000
+  _resource: 0a0000000200000005000000010000000a000000
   cardGap: 0
 --- !u!1 &1295684407
 GameObject:
@@ -3715,9 +3712,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176c865c08a639a4ca5e8654e26caf92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _order: 0
   _scorehappy: 0
-  _resource: 0a0000000a0000000a0000000a0000000a000000
+  _resource: 0a0000000200000005000000010000000a000000
   cardGap: 0
 --- !u!1 &1993398066
 GameObject:

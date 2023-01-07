@@ -6,8 +6,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private int _order;            // 플레이 순서
-    private int _scorehappy;       // 점수가 될 자원
-    private List<int> _resource;   // 갖고 있는 돈과 자원
+    [SerializeField] private int _scorehappy;       // 점수가 될 자원
+    [SerializeField] private List<int> _resource;   // 갖고 있는 돈과 자원
     //private List<Card> _hands;   // 핸드에 있는 카드 리스트
     private List<GameObject> _fields;    // 필드에 있는 카드 리스트
     private int slotUsed;
