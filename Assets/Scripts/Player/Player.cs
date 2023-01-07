@@ -122,11 +122,11 @@ public class Player : MonoBehaviour
         if (!found) return;
         for(; i<_fields.Count;i++)
         {
-            _fields[i].transform.position = gameObject.transform.position + Vector3.right * cardGap * i;
+            _fields[i].transform.DOLocalMove(Vector3.right * cardGap * i, 0.5f);
         }
         card.gameObject.SetActive(false);
-        Destroy(card);
         SlotUsed -= card.GetComponent<CardScript>().GetSlot();
+        Destroy(card);
     }
 
     /// <summary>
