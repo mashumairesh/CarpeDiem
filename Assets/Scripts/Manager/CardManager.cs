@@ -206,7 +206,15 @@ public class CardManager : MonoBehaviour
                 , 0.3f);
 
         }
-
+        for(int i=0; i<marketMax; i++)
+        {
+            if (i < 2)
+                listMarketCardCS[i].UpdateSaleInfo(-1);
+            else if(i < 2 + 5)
+                listMarketCardCS[i].UpdateSaleInfo(0);
+            else
+                listMarketCardCS[i].UpdateSaleInfo(1);
+        }
     }
 
     /// <summary>

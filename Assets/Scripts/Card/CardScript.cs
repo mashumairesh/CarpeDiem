@@ -7,14 +7,15 @@ public class CardScript : MonoBehaviour
 {
     public TextMeshPro[] ReqTexts;
     public TextMeshPro[] EffectTexts;
-    public TextMeshPro TurnText;
-    public GameObject slotObject, slotPrefab;
+    public TextMeshPro TurnText, SaleText;
+    public GameObject slotObject, slotPrefab, SaleObject;
     public float scaleMultiplier;
     private CardData _cardData;
     bool isPurchased;
     int turnLeft;
     float targetScale, originScale;
     float targetZ, originZ;
+    int originGoldCost;
     Vector3 v1, v2;
     // Start is called before the first frame update
     void Start()
@@ -49,6 +50,7 @@ public class CardScript : MonoBehaviour
         }
         isPurchased = false;
         turnLeft = _cardData.Turn;
+        originGoldCost = _cardData.Price[0];
     }
     public void OnMouseEnter()
     {
@@ -103,4 +105,26 @@ public class CardScript : MonoBehaviour
         return _cardData.Slot;
     }
     public bool IsPurchased { get { return isPurchased; } set { isPurchased = value; } }
+
+    /// <summary>
+    /// 카드의 세일 정보 갱신
+    /// </summary>
+    /// <param name="n">-1이면 할인, 0이면 그대로, +1이면 할증</param>
+    public void UpdateSaleInfo(int n)
+    {
+        SaleObject.SetActive(n != 0);
+        _cardData.Price[0] = originGoldCost;
+        if (n > 0)
+        {
+            SaleText.text = "+1";
+            _cardData.Price[0]++;
+            SaleText.color = Color.red;
+        }
+        else if (n < 0)
+        {
+            SaleText.text = "-1";
+            _cardData.Price[0]--;
+            SaleText.color = Color.blue;
+        }
+    }
 }
