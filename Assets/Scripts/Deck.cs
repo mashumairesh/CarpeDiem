@@ -8,11 +8,12 @@ public class Deck : MonoBehaviour
     private List<CardData> cards;
     public bool doShuffle;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         LoadCards();
         if (doShuffle)
             Shuffle();
+        //Debug.Log(cards.Count);
     }
 
     void LoadCards()
