@@ -190,6 +190,10 @@ public class TableManager : MonoBehaviour
         TableTurnEnd = true;
     }
 
+    public int Get_NowPlayer()
+    {
+        return nowPlayerTurn;
+    }
 
 
 

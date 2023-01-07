@@ -82,16 +82,13 @@ public class CardManager : MonoBehaviour
 
     private void GenerateCardGameObject()
     {
-        Debug.Log(deck);
         listOrgData = new List<CardData>();
         listOrgData = deck.cards;
-        Debug.Log(deck.cards);
         int LoopAmount = listOrgData.Count;
 
         Debug.Log("Count" + listOrgData.Count);
         for (int i = 0; i < LoopAmount; i++)
         {
-            Debug.Log(listOrgData[i].Price.Count + " " + listOrgData[i].Effect.Count);
             listGenCard.Add(Instantiate(TestCard));
             listGenCard[i].GetComponent<CardScript>().Initalize(listOrgData[i]);
         }
@@ -137,16 +134,16 @@ public class CardManager : MonoBehaviour
     /// <summary>
     /// 마켓에서부터 카드를 가져옵니다.
     /// </summary>
-    /// <param name="CardCode">카드번호 입니다.</param>
+    /// <param name="cardNum">카드번호 입니다.</param>
     /// <returns></returns>
-    public GameObject Get_MarketCard(int CardCode)
+    public GameObject Get_MarketCard(int cardNum)
     {
         GameObject tmpCard;
         int tmpindex = 99999;
 
         //선택한 카드 번호를 list에 존재하는지 찾고 해당 리스트 인덱스를 저장
         for (int i = 0; i < listMarketCardGO.Count; i++)
-            if (listMarketCardCS[i].GetCardNum() == CardCode)
+            if (listMarketCardCS[i].GetCardNum() == cardNum)
                 tmpindex = i;
                 //발견시 저장
 
