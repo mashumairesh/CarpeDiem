@@ -19,13 +19,17 @@ public class Player : MonoBehaviour
     public List<int> Resource { get => _resource; set => _resource = value; }
     public List<GameObject> Fields { get => _fields; set => _fields = value; }
     public int SlotUsed { get => slotUsed; }
+    private void Awake()
+    {
+        Initialize();
+    }
 
     /// <summary>
     /// _resource와 _fields를 초기화
     /// </summary>
     public void Initialize()
     {
-        _resource = new List<int>();
+        //_resource = new List<int>();
         _fields = new List<GameObject>();
     }
 
@@ -35,8 +39,9 @@ public class Player : MonoBehaviour
     /// <param name="gain">얼마나 얻었는지</param>
     public void Gain(List<int> gain)    // 
     {
-        for (int i = 0; i < gain.Count; i++)
+        for (int i = 0; i < _resource.Count; i++)
         {
+            Debug.Log(_resource.Count + " " + gain.Count);
             _resource[i] += gain[i];
         }
     }

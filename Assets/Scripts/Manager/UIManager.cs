@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private RectTransform ShoppingPannel;
     [SerializeField] private GameObject ShoppingClickBlocker;
+    [SerializeField] private GameObject ShoppingBreaker;
     
     [SerializeField] private List<Button> ShoppingButton;
     [SerializeField] private List<bool> ShoppingButtonAble;
@@ -45,7 +46,14 @@ public class UIManager : MonoBehaviour
         CardNum = cardNum;
         ShoppingButtonAble = Able;
         ShoppingTextResource = resource;
-        StartCoroutine(corFunc_PopupPurchaseUI());
+        StartCoroutine(corFunc_PopupPurchaseUI()); 
+        for (int i = 0; i < ShoppingButton.Count; i++)
+        {
+            if (ShoppingTextResource[i] < 99999)
+                ShoppingText[i].text = ShoppingTextResource[i].ToString();
+            else
+                ShoppingText[i].text = "X";
+        }
     }
 
     public void Popdown_PurchaseUI(int rsh)
@@ -56,8 +64,12 @@ public class UIManager : MonoBehaviour
         tmp[rsh] = ShoppingTextResource[rsh] + ShoppingTextResource[rsh + 5];
         StartCoroutine(corFunc_PopDownPurchaseUI());
 
-        CardManager.instance.Get_MarketCard(CardNum);
+        Debug.Log(TableManager.instance.Get_NowPlayerScript());
+        Debug.Log(CardNum);
+
+        TableManager.instance.Get_NowPlayerScript().AddCard(CardManager.instance.Get_MarketCard(CardNum));
         TableManager.instance.Get_NowPlayerScript().Use(tmp);
+        TableManager.instance.End_PlayerTurn();
 
     }
 
@@ -67,6 +79,12 @@ public class UIManager : MonoBehaviour
         {
             ShoppingButton[i].interactable = false;
         }
+    }
+
+    public void BTN_CancelShopping()
+    {
+
+        StartCoroutine(corFunc_PopDownPurchaseUI());
     }
 
     private IEnumerator corFunc_PopupPurchaseUI()
@@ -79,16 +97,18 @@ public class UIManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        ShoppingBreaker.SetActive(true);
+
         for (int i = 0; i < ShoppingButton.Count; i++)
         {
             ShoppingButton[i].interactable = ShoppingButtonAble[i];
-            ShoppingText[i].text = ShoppingTextResource[i].ToString();
         }
     }
 
     private IEnumerator corFunc_PopDownPurchaseUI()
     {
         ButtonClose();
+        ShoppingBreaker.SetActive(false);
         ShoppingPannel.gameObject.SetActive(true);
         ShoppingPannel.DOMoveY(1080 * 2f, 1f).SetEase(Ease.InOutBack);
 
