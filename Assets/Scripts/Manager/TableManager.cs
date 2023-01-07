@@ -200,10 +200,14 @@ public class TableManager : MonoBehaviour
         End_AfterTableTurn();
     }
 
+    public void End_PlayerSelfEnd(int rsh)
+    {
+        playerTurnEnd = true;
+    }
+
     /// <summary>
     /// 플레이어의 턴 종료시 호출해야 합니다.
     /// </summary>
-
     public void End_PlayerTurn()
     {
         playerTurnEnd = true;
