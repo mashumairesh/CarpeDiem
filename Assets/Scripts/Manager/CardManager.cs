@@ -157,6 +157,13 @@ public class CardManager : MonoBehaviour
         tmpCard = listMarketCardGO[tmpindex];
         listMarketCardGO.RemoveAt(tmpindex);
         listMarketCardCS.RemoveAt(tmpindex);
+
+        Add_Market();
+        RePosition_MarketCard();
+
+        //임시 카드 이동
+        tmpCard.transform.DOMove(new Vector2(100, 0),1f);
+
         return tmpCard;
     }
 
