@@ -32,6 +32,7 @@ public class TableManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI tmpSpendTurn;  //지난 턴
     [SerializeField] private TextMeshProUGUI tmpLimitTurn;  //최대 턴
 
+    [SerializeField] private TextMeshProUGUI tmpNowTurn;
 
     private bool hasInit = false;
 
@@ -45,6 +46,11 @@ public class TableManager : MonoBehaviour
     {
         if (!hasInit)
             Initialize();
+    }
+
+    private void Start()
+    {
+        StartTable();
     }
 
     private void Initialize()
@@ -68,12 +74,12 @@ public class TableManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.End))
+/*        if (Input.GetKeyDown(KeyCode.End))
             StartTable();
         if (Input.GetKeyDown(KeyCode.UpArrow))
             End_PlayerTurn();
         if (Input.GetKeyDown(KeyCode.DownArrow))
-            End_TableTurn();
+            End_TableTurn();*/
     }
 
 
@@ -90,6 +96,8 @@ public class TableManager : MonoBehaviour
 
             for (int j = 0; j < maxPlayer; j++)
             {
+                tmpNowTurn.text = "NowPlayer : <color=#FF0000>" + j.ToString() + "</color>";
+
                 nowPlayerTurn = j;
                 Debug.Log("Now Player : " + j);
 
@@ -104,6 +112,7 @@ public class TableManager : MonoBehaviour
                 yield return new WaitUntil(() => playerAfterTurnEnd == true);
                 playerAfterTurnEnd = false;
 
+                
 
             }
 
@@ -151,9 +160,12 @@ public class TableManager : MonoBehaviour
     {
         //플레이어의 재화 확보
 
+        listPlayer[nowPlayerTurn].EndTurn();
 
         //마켓 충당
         CardManager.instance.Add_Market();
+
+        End_AfterPlayerTurn();
 
     }
 
@@ -163,6 +175,7 @@ public class TableManager : MonoBehaviour
     private void Run_TableTurn()
     {
         //테이블 턴 시작시 함수 호출
+        End_TableTurn();
     }
 
     /// <summary>
@@ -170,26 +183,35 @@ public class TableManager : MonoBehaviour
     /// </summary>
     private void Run_AfterTableTurn()
     {
-
         //테이블 턴 종료시의 함수 호출
-
+        End_AfterTableTurn();
     }
 
     /// <summary>
     /// 플레이어의 턴 종료시 호출해야 합니다.
     /// </summary>
 
-    private void End_PlayerTurn()
+    public void End_PlayerTurn()
     {
         playerTurnEnd = true;
     }
-    
+
+    public void End_AfterPlayerTurn()
+    {
+        playerAfterTurnEnd = true;
+    }
+
     /// <summary>
     /// 테이블의 턴 종료시 호출되어야 합니다.
     /// </summary>
     public void End_TableTurn()
     {
         TableTurnEnd = true;
+    }
+
+    public void End_AfterTableTurn()
+    {
+        TableAfterTurnEnd = true;
     }
 
     public int Get_NowPlayer()
