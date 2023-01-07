@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private List<bool> ShoppingButtonAble;
     [SerializeField] private List<TextMeshProUGUI> ShoppingText;
     [SerializeField] private List<int> ShoppingTextResource;
+    
+    [SerializeField] private List<UpScorePopup> upScorePopup;
 
     [SerializeField] private int CardNum;
 
@@ -120,6 +122,11 @@ public class UIManager : MonoBehaviour
         ShoppingPannel.gameObject.SetActive(false);
         ShoppingClickBlocker.SetActive(false);
         ShoppingWorldClickBlocker.SetActive(false);
+    }
+
+    public UpScorePopup Get_UpScore(int rsh)
+    {
+        return upScorePopup[rsh];
     }
 
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 테이블의 진행을 관리하는 메니저입니다.
@@ -14,6 +16,8 @@ public class TableManager : MonoBehaviour
 {
     
     public static TableManager instance;
+
+    public bool IsDebuging;
 
     [Tooltip("최대 턴 횟수 입니다.")]
     [SerializeField] private int maxTurn;
@@ -44,6 +48,12 @@ public class TableManager : MonoBehaviour
     [SerializeField] private GameObject GameOverBlock;
     [SerializeField] private GameObject GameOverBlockImg;
 
+    [SerializeField] private GameObject WinnerPanel;
+    [SerializeField] private Image WinnerFill;
+    [SerializeField] private List<TextMeshProUGUI> WinnerRank;
+    [SerializeField] private List<TextMeshProUGUI> WinnerPlayer;
+    [SerializeField] private Button ReturnButton;
+
     private int CountEndCards = 0;
 
     private bool hasInit = false;
@@ -64,6 +74,10 @@ public class TableManager : MonoBehaviour
         GameOverMessage.gameObject.SetActive(false);
         if (!hasInit)
             Initialize();
+        for (int i = 0; i < maxPlayer; i++)
+        {
+            listPlayer[i].Order = i;
+        }
     }
 
     private void Start()
@@ -80,6 +94,9 @@ public class TableManager : MonoBehaviour
         playerAfterTurnEnd = false;
         TableTurnEnd = false;
         TableAfterTurnEnd = false;
+
+        WinnerPanel.gameObject.SetActive(false);
+        ReturnButton.interactable = false;
     }
 
     /// <summary>
@@ -218,7 +235,11 @@ public class TableManager : MonoBehaviour
         TurnEndMessage.gameObject.SetActive(true);
         TurnEndBlock.SetActive(true);
         TurnEndBlockImg.SetActive(true);
-        yield return new WaitForSeconds(2f);
+        if (IsDebuging)
+            yield return new WaitForSeconds(0.1f);
+        else
+            yield return new WaitForSeconds(1f);
+
         TurnEndMessage.gameObject.SetActive(false);
         TurnEndBlock.SetActive(false);
         TurnEndBlockImg.SetActive(false);
@@ -246,6 +267,57 @@ public class TableManager : MonoBehaviour
         GameOverMessage.gameObject.SetActive(true);
         GameOverBlock.SetActive(true);
         GameOverBlockImg.SetActive(true);
+
+        //스코어 계산
+
+        List<int> Score = new List<int>();
+        List<int> Player = new List<int>();
+        for (int i = 0; i < maxPlayer; i++)
+        {
+            Score.Add(listPlayer[i].Resource[i + 1]);
+            Player.Add(i + 1);
+        }
+        int tmpint;
+        for (int i = 0; i < maxPlayer - 1; i++)
+        {
+            for (int j = 0; j < maxPlayer - 1; j++)
+            {
+                if (Score[j] < Score[j + 1])
+                {
+                    tmpint = Score[j + 1];
+                    Score[j + 1] = Score[j];
+                    Score[j] = tmpint;
+
+                    tmpint = Player[j + 1];
+                    Player[j + 1] = Player[j];
+                    Player[j] = tmpint;
+                }
+            }
+        }
+
+        yield return new WaitForSeconds(3f);
+
+        WinnerPanel.gameObject.SetActive(true);
+
+        WinnerFill.DOFillAmount(1f, 10f);
+
+        for (int i = 0; i < maxPlayer; i++)
+        {
+            WinnerRank[i].text = (i + 1).ToString();
+            WinnerPlayer[i].text = "Player : " + Player[i].ToString() +"\nScore : " + Score[i].ToString();
+        }
+
+        yield return new WaitForSeconds(10f);
+
+        ReturnButton.interactable = true;
+
+        //종료 확인 버튼 -> 메인으로 돌아감
+
+    }
+
+    public void BTN_ReturnMain()
+    {
+        SceneManager.LoadScene(1);
     }
 
     /// <summary>

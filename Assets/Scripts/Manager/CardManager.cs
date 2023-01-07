@@ -196,22 +196,20 @@ public class CardManager : MonoBehaviour
         float Length = ((listMarketHolder[listMarketHolder.Count - 1].transform.position.x - listMarketHolder[0].transform.position.x) / 9f);
         Vector3 VecOrg = listMarketHolder[0].transform.position;
         Vector3 tmpVec = listMarketHolder[0].transform.position;
-        for (int i = 0; i < marketMax; i++)
+        for (int i = 0; i < listMarketCardGO.Count; i++)
         {
             //1. Transform 을 기준으로     + ( ( ( (2)B-(1)A ) / (Max - 1) ) * i )
-
             tmpVec = VecOrg;
             tmpVec.x += (Length * (float)i);
             listMarketCardGO[i].transform.DOMove(
                 ( tmpVec )
                 , 0.3f);
-
         }
-        for(int i=0; i<marketMax; i++)
+        for (int i = 0; i < listMarketCardCS.Count; i++)
         {
             if (i < 2)
                 listMarketCardCS[i].UpdateSaleInfo(-1);
-            else if(i < 2 + 5)
+            else if (i < 2 + 5)
                 listMarketCardCS[i].UpdateSaleInfo(0);
             else
                 listMarketCardCS[i].UpdateSaleInfo(1);

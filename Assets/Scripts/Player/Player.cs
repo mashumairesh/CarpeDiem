@@ -70,6 +70,10 @@ public class Player : MonoBehaviour
         {
             Debug.Log(_resource.Count + " " + gain.Count);
             _resource[i] += gain[i];
+
+            UIManager.instance.Get_UpScore(_order).gameObject.SetActive(true);
+            UIManager.instance.Get_UpScore(_order).DrawText(gain);
+
         }
     }
 
