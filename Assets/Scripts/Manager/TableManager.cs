@@ -204,6 +204,12 @@ public class TableManager : MonoBehaviour
 
     }
 
+    public Player Get_NowPlayerScript()
+    {
+
+        return listPlayer[nowPlayerTurn];
+    
+    }
 
 
 
