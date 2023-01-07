@@ -34,6 +34,8 @@ public class TableManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI tmpNowTurn;
 
+    [SerializeField] private List<TestPointPanel> testPointPanel;
+
     private bool hasInit = false;
 
     private void OnEnable()
@@ -89,6 +91,7 @@ public class TableManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator corFunc_RollTable()
     {
+        DrawPannel();
 
         for (int i = 0; i < maxTurn; i++)
         {
@@ -96,10 +99,8 @@ public class TableManager : MonoBehaviour
 
             for (int j = 0; j < maxPlayer; j++)
             {
-                tmpNowTurn.text = "NowPlayer : <color=#FF0000>" + j.ToString() + "</color>";
-
                 nowPlayerTurn = j;
-                Debug.Log("Now Player : " + j);
+                DrawPannel();
 
                 //플레이어 턴 실행
                 Run_PlayerTurn(j);
@@ -112,8 +113,8 @@ public class TableManager : MonoBehaviour
                 yield return new WaitUntil(() => playerAfterTurnEnd == true);
                 playerAfterTurnEnd = false;
 
-                
 
+                DrawPannel();
             }
 
             //테이블 자체에 어떠한 효과가 나와야 한다면 호출
@@ -137,6 +138,18 @@ public class TableManager : MonoBehaviour
     // 다음 플레이어에게 넘긴다.
     // 반복
 
+    private void DrawPannel()
+    {
+        bool tmp = false;
+        for (int i = 0; i < 4; i++)
+        {
+            if (i == nowPlayerTurn)
+                tmp = true;
+            else
+                tmp = false;
+            testPointPanel[i].DrawInfo(tmp, listPlayer[i].Resource);
+        }
+    }
 
     /// <summary>
     /// 해당하는 플레이어 턴을 실행한다.
