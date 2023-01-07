@@ -88,6 +88,7 @@ public class TableManager : MonoBehaviour
 
             for (int j = 0; j < maxPlayer; j++)
             {
+                nowPlayerTurn = j;
                 Debug.Log("Now Player : " + j);
 
                 //플레이어 턴 실행
@@ -148,6 +149,9 @@ public class TableManager : MonoBehaviour
     {
         //플레이어의 재화 확보
 
+
+        //마켓 충당
+        CardManager.instance.Add_Market();
 
     }
 
