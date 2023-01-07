@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
+
 public class Player : MonoBehaviour
 {
     private int _order;            // 플레이 순서
@@ -11,19 +13,44 @@ public class Player : MonoBehaviour
     //private List<Card> _hands;   // 핸드에 있는 카드 리스트
     private List<GameObject> _fields;    // 필드에 있는 카드 리스트
     private int slotUsed;
-    public const int maxSlot = 10;
+    public const int maxSlot = 4;
     public float cardGap;  // 카드 사이의 간격
-
+    public TextMeshProUGUI slotText;
     public int Order { get => _order; set => _order = value; }
     public int Scorehappy { get => _scorehappy; set => _scorehappy = value; }
     public List<int> Resource { get => _resource; set => _resource = value; }
     public List<GameObject> Fields { get => _fields; set => _fields = value; }
-    public int SlotUsed { get => slotUsed; }
+    public int SlotUsed 
+    { 
+        get => slotUsed; 
+        set
+        {
+            slotUsed = value;
+            slotText.text = string.Format("Slots: {0}/{1}", slotUsed, maxSlot);
+        }
+    }
+    public int SlotLeft
+    {
+        get => (maxSlot - slotUsed);
+    }
     private void Awake()
     {
         Initialize();
+        SlotUsed = 0;        
     }
 
+    public void FlashRed()
+    {
+        StopAllCoroutines();
+        StartCoroutine(RunFlashRed());
+    }
+
+    IEnumerator RunFlashRed()
+    {
+        slotText.color = Color.red;
+        yield return new WaitForSeconds(1.0f);
+        slotText.color = Color.white;
+    }
     /// <summary>
     /// _resource와 _fields를 초기화
     /// </summary>
@@ -66,7 +93,7 @@ public class Player : MonoBehaviour
     {
         CardScript card = newcard.GetComponent<CardScript>();
         _fields.Add(newcard);
-        slotUsed += card.GetSlot();
+        SlotUsed += card.GetSlot();
         card.IsPurchased = true;
         int index = _fields.Count-1;
         _fields[index].transform.parent = transform;
@@ -80,7 +107,6 @@ public class Player : MonoBehaviour
     /// <param name="card">제거할 카드</param>
     public void RemoveCard(GameObject card) // 
     {
-        Debug.Log("Hello");
         int cardNum = card.GetComponent<CardScript>().GetCardNum();
         int i;
         bool found = false;
@@ -100,7 +126,7 @@ public class Player : MonoBehaviour
         }
         card.gameObject.SetActive(false);
         Destroy(card);
-        slotUsed -= card.GetComponent<CardScript>().GetSlot();
+        SlotUsed -= card.GetComponent<CardScript>().GetSlot();
     }
 
     /// <summary>

@@ -62,7 +62,12 @@ public class CardScript : MonoBehaviour
     public void OnMouseDown()
     {
         if (!isPurchased)
-            UIManager.instance.Popup_PurchaseUI(this._cardData.CardNum, CardManager.instance.Check_BuyThisCard(this._cardData.CardNum, TableManager.instance.Get_NowPlayerResource()),this._cardData.Price);
+        {
+            if (TableManager.instance.Get_NowPlayerScript().SlotLeft >= this._cardData.Slot)
+                UIManager.instance.Popup_PurchaseUI(this._cardData.CardNum, CardManager.instance.Check_BuyThisCard(this._cardData.CardNum, TableManager.instance.Get_NowPlayerResource()), this._cardData.Price);
+            else
+                TableManager.instance.Get_NowPlayerScript().FlashRed();
+        }
         else
             TableManager.instance.Get_NowPlayerScript().RemoveCard(gameObject);
     }
