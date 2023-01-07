@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
         set
         {
             slotUsed = value;
-            slotText.text = string.Format("Slots: {0}/{1}", slotUsed, maxSlot);
+            slotText.text = string.Format("Slots : {0}/{1}", slotUsed, maxSlot);
         }
     }
     public int SlotLeft
