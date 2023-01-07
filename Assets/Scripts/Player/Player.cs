@@ -94,6 +94,7 @@ public class Player : MonoBehaviour
     /// 한 턴이 끝날 때마다 필요한 작업
     /// 필드에 있는 카드 효과 
     /// 필드에 있는 카드마다 턴 줄이기
+    /// 구매를 하지 않았을 때 돈 또는 자원을 획득
     /// </summary>
     public void EndTurn()
     {
