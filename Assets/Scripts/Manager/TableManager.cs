@@ -36,6 +36,9 @@ public class TableManager : MonoBehaviour
 
     [SerializeField] private List<TestPointPanel> testPointPanel;
 
+    [SerializeField] private TextMeshProUGUI TurnEndMessage;
+    [SerializeField] private GameObject TurnEndBlock;
+
     private bool hasInit = false;
 
     private void OnEnable()
@@ -46,6 +49,8 @@ public class TableManager : MonoBehaviour
 
     private void Awake()
     {
+        TurnEndBlock.SetActive(false);
+        TurnEndMessage.gameObject.SetActive(false);
         if (!hasInit)
             Initialize();
     }
@@ -172,14 +177,25 @@ public class TableManager : MonoBehaviour
     private void Run_AfterPlayerTurn(int rsh)
     {
         //플레이어의 재화 확보
-
         listPlayer[nowPlayerTurn].EndTurn();
 
         //마켓 충당
         CardManager.instance.Add_Market();
 
+        // 턴 종류 메세지 띄우기
+        StartCoroutine(EndMessage());
+
         End_AfterPlayerTurn();
 
+    }
+
+    private IEnumerator EndMessage()
+    {
+        TurnEndMessage.gameObject.SetActive(true);
+        TurnEndBlock.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        TurnEndMessage.gameObject.SetActive(false);
+        TurnEndBlock.SetActive(false);
     }
 
     /// <summary>

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using Unity.VisualScripting;
 
 public class UIManager : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private List<bool> testBool;
     [SerializeField] private List<int> testInt;
+
 
     private void OnEnable()
     {
