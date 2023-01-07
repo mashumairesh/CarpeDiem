@@ -18,7 +18,8 @@ public class Deck : MonoBehaviour
 
     void LoadCards()
     {
-        StreamReader fs = new StreamReader(Path.Combine(Application.dataPath, "Resources/Json/cards.json"));
+        //StreamReader fs = new StreamReader(Path.Combine(Application.dataPath, "Resources/Json/cards.json"));
+        StreamReader fs = new StreamReader(Path.Combine(Application.streamingAssetsPath ,"cards_.json"));
         string str = fs.ReadToEnd();
         var json = JsonUtility.FromJson<CardLoadData>(str);
         _cards = new List<CardData>();
