@@ -88,6 +88,8 @@ public class Player : MonoBehaviour
                 break;
             }
         }
+        if (i == _fields.Count)
+            return;
         for(; i<_fields.Count;i++)
         {
             _fields[i].transform.position = gameObject.transform.position + Vector3.right * cardGap * i;
