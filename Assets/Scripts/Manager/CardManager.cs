@@ -211,7 +211,9 @@ public class CardManager : MonoBehaviour
     public List<bool> Check_BuyThisCard(int cardNum, List<int> Happy)
     {
         List<int> tmpPrice;
-        List<bool> buyAble = new List<bool>(5); //5가지 항목
+        List<bool> buyAble = new List<bool>(); //5가지 항목
+        for (int i = 0; i < 5; i++) buyAble.Add(false);
+        Debug.Log(buyAble.Count);
         //list Market Card 에서 카드 번호를 순회한 뒤 해당하는 항목과 가격비교
         for (int i = 0; i < listMarketCardGO.Count; i++)
             //카드 번호가 동일함. 구매 가능 여부 확인

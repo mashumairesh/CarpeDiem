@@ -7,6 +7,7 @@ using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager instance;
 
     [SerializeField] private RectTransform ShoppingPannel;
     
@@ -18,6 +19,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private List<bool> testBool;
     [SerializeField] private List<int> testInt;
 
+    private void OnEnable()
+    {
+        if (instance == null)
+            instance = this;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -26,7 +33,7 @@ public class UIManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            Popdown_PurchaseUI();
+            Popdown_PurchaseUI(0);
         }
     }
 
@@ -37,7 +44,7 @@ public class UIManager : MonoBehaviour
         StartCoroutine(corFunc_PopupPurchaseUI());
     }
 
-    public void Popdown_PurchaseUI()
+    public void Popdown_PurchaseUI(int rsh)
     {
         StartCoroutine(corFunc_PopDownPurchaseUI());
     }
