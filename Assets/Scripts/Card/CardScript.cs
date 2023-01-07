@@ -10,7 +10,7 @@ public class CardScript : MonoBehaviour
     public TextMeshPro TurnText;
     public float scaleMultiplier;
     private CardData _cardData;
-    bool isControlAble;
+    bool isPurchased;
     int turnLeft;
     float targetScale;
     float originScale;
@@ -36,7 +36,7 @@ public class CardScript : MonoBehaviour
             EffectTexts[i].text = _cardData.Effect[i].ToString();
         }
         TurnText.text = _cardData.Turn.ToString();
-        isControlAble = true;
+        isPurchased = false;
         turnLeft = _cardData.Turn;
     }
     public void OnMouseEnter()
@@ -58,7 +58,10 @@ public class CardScript : MonoBehaviour
 
     public void OnMouseDown()
     {
-        PurChase();
+        if (!isPurchased)
+            CardManager.instance.Check_BuyThisCard(this._cardData.CardNum, TableManager.instance.Get_NowPlayerResource());
+        else
+            TableManager.instance.Get_NowPlayerScript().RemoveCard(gameObject);
     }
     public int GetCardNum()
     {
@@ -80,13 +83,5 @@ public class CardScript : MonoBehaviour
     {
         return _cardData.Slot;
     }
-    public bool GetCA()
-    {
-        return isControlAble;
-    }
-
-    public void PurChase()
-    {
-        isControlAble = false;
-    }
+    public bool IsPurchased { get { return isPurchased; } set { isPurchased = value; } }
 }
