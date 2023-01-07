@@ -60,6 +60,11 @@ public class Player : MonoBehaviour
         Destroy(card);
     }
 
+    public void EndTurn()
+    {
+        // ToDo
+    }
+
     public int GetScore()
     {
         return _resource[_scorehappy];
