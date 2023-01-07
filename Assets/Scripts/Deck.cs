@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -13,19 +14,31 @@ public class Deck : MonoBehaviour
         LoadCards();
         if (doShuffle)
             Shuffle();
-        //Debug.Log(cards.Count);
     }
 
     void LoadCards()
     {
         StreamReader fs = new StreamReader(Path.Combine(Application.dataPath, "Resources/Json/cards.json"));
-        this._cards = JsonUtility.FromJson<CardLoadData>(fs.ReadToEnd()).cards;
+        string str = fs.ReadToEnd();
+        var json = JsonUtility.FromJson<CardLoadData>(str);
+        _cards = new List<CardData>();
+        foreach (var card in json.cards)
+        {
+            CardData newCard = new CardData();
+            newCard.CardNum = card.id;
+            newCard.Price = card.price;
+            newCard.Effect = card.effect;
+            newCard.Turn = card.turn;
+            newCard.Slot = card.slot;
+
+            _cards.Add(newCard);
+        }
     }
 
     void Shuffle()
     {
         for(int i=0; i<_cards.Count - 1; i++) {
-            int rnd = Random.Range(i, _cards.Count - 1);
+            int rnd = UnityEngine.Random.Range(i, _cards.Count - 1);
             CardData tmp = _cards[i];
             _cards[i] = _cards[rnd];
             _cards[rnd] = tmp;
@@ -43,5 +56,15 @@ public class Deck : MonoBehaviour
 
 public class CardLoadData
 {
-    public List<CardData> cards;
+    public List<CardFromJson> cards;
+}
+
+[System.Serializable]
+public class CardFromJson
+{
+    public int id;
+    public List<int> price;
+    public List<int> effect;
+    public int turn;
+    public int slot;
 }
