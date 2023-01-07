@@ -245,7 +245,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 91913841}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1059906930}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: Popdown_PurchaseUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &116668048
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1952,7 +1964,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1325034927}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1059906930}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: Popdown_PurchaseUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1325034929
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2235,7 +2259,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1619574068}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1059906930}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: Popdown_PurchaseUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1619574070
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2645,7 +2681,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1708640387}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1059906930}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: Popdown_PurchaseUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1708640389
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2852,7 +2900,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1748985198}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1059906930}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: Popdown_PurchaseUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1748985200
 CanvasRenderer:
   m_ObjectHideFlags: 0
