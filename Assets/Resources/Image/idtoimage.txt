@@ -1,0 +1,9 @@
+1~4, 21~24 : OfficeWorker
+5, 6, 25, 26, 49, 50 : Doctor
+7~12, 27~32 : PartTimeJob
+13, 33 : BlueJob
+14, 34 : GreenJob
+15, 35 : CyanJob
+16, 36 : RedJob
+17~20, 37~44 : Friends
+45~48 : Happy
