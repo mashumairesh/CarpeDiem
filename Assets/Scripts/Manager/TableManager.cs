@@ -126,7 +126,7 @@ public class TableManager : MonoBehaviour
     {
         DrawPannel();
 
-        for (int i = 0; i < maxTurn; i++)
+        for (int i = 0; i < maxTurn; i++) // maxRound
         {
             Debug.Log("Now Turn : " + i);
 
@@ -161,6 +161,9 @@ public class TableManager : MonoBehaviour
 
             //테이블 턴이 끝날시에 호출
             Run_AfterTableTurn();
+
+            // 게임 종료 조건 확인하기
+            CheckGameOver();
 
             yield return new WaitUntil(() => TableAfterTurnEnd == true);
             TableTurnEnd = false;
@@ -222,8 +225,6 @@ public class TableManager : MonoBehaviour
         // 턴 종류 메세지 띄우기
         StartCoroutine(EndMessage());
 
-        // 게임 종료 조건 확인하기
-        CheckGameOver();
 
         End_AfterPlayerTurn();
 
@@ -266,7 +267,6 @@ public class TableManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator OverMessage()
     {
-        yield return new WaitForSeconds(2f);
         GameOverMessage.gameObject.SetActive(true);
         GameOverBlock.SetActive(true);
         GameOverBlockImg.SetActive(true);
