@@ -1,0 +1,12 @@
+Font: MICEGothic  Style: Regular
+Point Size: 239   SP/PD Ratio: 1.7%
+
+Characters included: 0/0
+Missing characters: 0
+Excluded characters: 0
+
+Characters missing from font file:
+----------------------------------------
+
+Characters excluded from packing:
+----------------------------------------

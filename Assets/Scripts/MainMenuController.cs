@@ -11,9 +11,20 @@ public class MainMenuController : MonoBehaviour
 
     [SerializeField] private GameObject ExitText;
 
+    [SerializeField] private GameObject RuleBookHolder;
+    [SerializeField] private List<GameObject> Rules;
+
+    [SerializeField] private bool isOpenRule;
+    [SerializeField] private int RuleNowPage;
+
     private void Start()
     {
         ExitText.SetActive(false);
+        isOpenRule = false;
+        RuleBookHolder.SetActive(false);
+        RuleNowPage = 0;
+        for(int i = 0; i < Rules.Count; i++)
+            Rules[i].SetActive(false);
     }
 
     public void BTN_CallExit()
@@ -44,4 +55,41 @@ public class MainMenuController : MonoBehaviour
 
         ExitText.gameObject.SetActive(false);
     }
+
+    public void BTN_CallRuleBook()
+    {
+        isOpenRule = true;
+        //·êºÏÀ» ¿±´Ï´Ù.
+        RuleBookHolder.SetActive(true);
+        Rules[0].SetActive(true);
+    }
+
+    public void BTN_ContinueRule()
+    {
+        switch (RuleNowPage)
+        {
+            case 0:
+                Rules[0].SetActive(false);
+                Rules[1].SetActive(true);
+                RuleNowPage++;
+                break;
+            case 1:
+                Rules[1].SetActive(false);
+                Rules[2].SetActive(true);
+                RuleNowPage++;
+                break;
+            case 2:
+                Rules[2].SetActive(false);
+                isOpenRule = false;
+                RuleNowPage = 0;
+                RuleBookHolder.SetActive(false);
+
+                return;
+
+
+            default:
+                break;
+        }
+    }
+
 }
