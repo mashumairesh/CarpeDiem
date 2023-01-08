@@ -19400,7 +19400,7 @@ MonoBehaviour:
   TurnEndBlockImg: {fileID: 1979244352}
   GameOverMessage: {fileID: 202610164}
   GameOverBlock: {fileID: 107546359}
-  GameOverBlockImg: {fileID: 1511421085}
+  GameOverBlockImg: {fileID: 1979244352}
   WinnerPanel: {fileID: 813409896}
   WinnerFill: {fileID: 2002880973}
   WinnerRank:
