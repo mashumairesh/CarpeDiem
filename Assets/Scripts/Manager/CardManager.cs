@@ -300,4 +300,9 @@ public class CardManager : MonoBehaviour
         RePosition_MarketCard();
     }
 
+    public void UpdatePlayerSaleInfo(int curPlayer)
+    {
+        for (int i = 0; i < listMarketCardCS.Count; i++)
+            listMarketCardCS[i].UpdatePlayerSaleInfo(curPlayer);
+    }
 }
