@@ -141,8 +141,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706055564375162405}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.054, y: 0.057, z: -0.001}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalPosition: {x: -0.01, y: 0.057, z: -0.001}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2705161190510454607}
@@ -189,7 +189,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 62ff2f688f7a97a42810b786182c4f8b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 18f0438ca6b19634fbfd39690fc5a326, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -902,6 +902,7 @@ MonoBehaviour:
   slotObject: {fileID: 393808388293745769}
   slotPrefab: {fileID: 8968914328326059535, guid: 3b709a85f0bf89447aed134e940e24f7, type: 3}
   SaleObject: {fileID: 1066949257644103141}
+  exitObject: {fileID: 706055564375162405}
   scaleMultiplier: 2.5
 --- !u!1 &2705161190966929717
 GameObject:

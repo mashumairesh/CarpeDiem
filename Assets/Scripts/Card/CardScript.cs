@@ -8,7 +8,7 @@ public class CardScript : MonoBehaviour
     public TextMeshPro[] ReqTexts;
     public TextMeshPro[] EffectTexts;
     public TextMeshPro TurnText, SaleText;
-    public GameObject slotObject, slotPrefab, SaleObject;
+    public GameObject slotObject, slotPrefab, SaleObject, exitObject;
     public float scaleMultiplier;
     private CardData _cardData;
     bool isPurchased;
@@ -51,6 +51,7 @@ public class CardScript : MonoBehaviour
         isPurchased = false;
         turnLeft = _cardData.Turn;
         originGoldCost = _cardData.Price[0];
+        exitObject.SetActive(_cardData.Effect[5] != 0);
     }
     public void OnMouseEnter()
     {
