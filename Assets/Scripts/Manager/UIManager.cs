@@ -34,14 +34,14 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        /*if (Input.GetKeyDown(KeyCode.Q))
         {
             Popup_PurchaseUI(0, testBool, testInt);
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
             Popdown_PurchaseUI(0);
-        }
+        }*/
     }
 
     public void Popup_PurchaseUI(int cardNum, List<bool> Able, List<int> resource)
