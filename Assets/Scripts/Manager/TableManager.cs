@@ -134,7 +134,7 @@ public class TableManager : MonoBehaviour
             {
                 nowPlayerTurn = j;
                 DrawPannel();
-
+                CardManager.instance.UpdatePlayerSaleInfo(j + 1);
                 //플레이어 턴 실행
                 Run_PlayerTurn(j);
 

@@ -8,14 +8,14 @@ public class CardScript : MonoBehaviour
     public TextMeshPro[] ReqTexts;
     public TextMeshPro[] EffectTexts;
     public TextMeshPro TurnText, SaleText;
-    public GameObject slotObject, slotPrefab, SaleObject, exitObject;
+    public GameObject slotObject, slotPrefab, SaleObject, exitObject, playerSaleObject;
     public float scaleMultiplier;
     private CardData _cardData;
     bool isPurchased;
     int turnLeft;
     float targetScale, originScale;
     float targetZ, originZ;
-    int originGoldCost;
+    List<int> originGoldCosts;
     Vector3 v1, v2;
     // Start is called before the first frame update
     void Start()
@@ -50,7 +50,7 @@ public class CardScript : MonoBehaviour
         }
         isPurchased = false;
         turnLeft = _cardData.Turn;
-        originGoldCost = _cardData.Price[0];
+        originGoldCosts = new List<int>(_cardData.Price);
         exitObject.SetActive(_cardData.Effect[5] != 0);
     }
     public void OnMouseEnter()
@@ -114,7 +114,7 @@ public class CardScript : MonoBehaviour
     public void UpdateSaleInfo(int n)
     {
         SaleObject.SetActive(n != 0);
-        _cardData.Price[0] = originGoldCost;
+        _cardData.Price[0] = originGoldCosts[0];
         if (n > 0)
         {
             SaleText.text = "+1";
@@ -127,5 +127,15 @@ public class CardScript : MonoBehaviour
             _cardData.Price[0]--;
             SaleText.color = Color.blue;
         }
+    }
+
+    public void UpdatePlayerSaleInfo(int curPlayer)
+    {
+        playerSaleObject.transform.parent = ReqTexts[curPlayer].gameObject.transform;
+        playerSaleObject.transform.localPosition = Vector3.left * 0.62f;
+        playerSaleObject.GetComponent<SpriteRenderer>().color = ReqTexts[curPlayer].transform.parent.gameObject.GetComponent<SpriteRenderer>().color;
+        for (int i = 1; i < 5; i++)
+            _cardData.Price[i] = originGoldCosts[i];
+        _cardData.Price[curPlayer]--;
     }
 }
