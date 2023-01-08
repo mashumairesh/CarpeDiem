@@ -6361,7 +6361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scorehappy: 0
-  _resource: 0b00000003000000040000000200000003000000
+  _resource: 1000000003000000040000000200000003000000
   cardGap: -1.5
   slotText: {fileID: 108844910}
 --- !u!1 &703236724
@@ -6850,7 +6850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scorehappy: 0
-  _resource: 0d00000002000000030000000300000004000000
+  _resource: 1200000002000000030000000300000004000000
   cardGap: 1.5
   slotText: {fileID: 1076978403}
 --- !u!1 &764989604
@@ -11022,7 +11022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scorehappy: 0
-  _resource: 0a00000004000000020000000300000003000000
+  _resource: 0f00000004000000020000000300000003000000
   cardGap: 1.5
   slotText: {fileID: 191905770}
 --- !u!1 &1252764940
@@ -17577,7 +17577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scorehappy: 0
-  _resource: 0c00000003000000030000000400000002000000
+  _resource: 1100000003000000030000000400000002000000
   cardGap: -1.5
   slotText: {fileID: 1252764942}
 --- !u!1 &1947162940
