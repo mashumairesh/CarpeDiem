@@ -19362,7 +19362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847f833e5cfe57e438984002745931c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDebuging: 1
+  IsDebuging: 0
   maxTurn: 20
   maxPlayer: 4
   nowPlayerTurn: 0
