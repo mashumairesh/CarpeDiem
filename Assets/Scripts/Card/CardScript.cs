@@ -133,6 +133,7 @@ public class CardScript : MonoBehaviour
     {
         playerSaleObject.transform.parent = ReqTexts[curPlayer].gameObject.transform;
         playerSaleObject.transform.localPosition = Vector3.left * 0.62f;
+        playerSaleObject.GetComponent<SpriteRenderer>().color = ReqTexts[curPlayer].transform.parent.gameObject.GetComponent<SpriteRenderer>().color;
         for (int i = 1; i < 5; i++)
             _cardData.Price[i] = originGoldCosts[i];
         _cardData.Price[curPlayer]--;
