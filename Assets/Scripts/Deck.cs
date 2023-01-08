@@ -45,12 +45,8 @@ public class Deck : MonoBehaviour
         }
         for(int i=1;i<=4;i++)
         {
-            int rnd = UnityEngine.Random.Range(1, 25);
-            exchange(rnd, 45 + i);
-            for(int j=rnd;j<_cards.Count - 1 - 4 + i; j++)
-            {
-                exchange(j, j + 1);
-            }
+            int rnd = UnityEngine.Random.Range((_cards.Count - 4)/3, _cards.Count - 4 + i);
+            exchange(_cards.Count - 1 - 4 + i, rnd);
         }
     }
     private void exchange(int x, int y)
