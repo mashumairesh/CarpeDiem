@@ -11,7 +11,7 @@ public class MainMenuController : MonoBehaviour
 
     [SerializeField] private GameObject ExitText;
 
-    [SerializeField] private GameObject RuleBookHolder;
+    [SerializeField] private GameObject RuleBookHolder, title;
     [SerializeField] private List<GameObject> Rules;
 
     [SerializeField] private bool isOpenRule;
@@ -71,6 +71,7 @@ public class MainMenuController : MonoBehaviour
         //∑Í∫œ¿ª ø±¥œ¥Ÿ.
         RuleBookHolder.SetActive(true);
         Rules[0].SetActive(true);
+        title.SetActive(false);
     }
 
     public void BTN_ContinueRule()
@@ -93,7 +94,7 @@ public class MainMenuController : MonoBehaviour
                 isOpenRule = false;
                 RuleNowPage = 0;
                 RuleBookHolder.SetActive(false);
-
+                title.SetActive(true);
                 return;
 
 
