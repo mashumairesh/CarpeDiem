@@ -31,7 +31,7 @@ public class GotoMainMenu : MonoBehaviour
 
         listImage[0].gameObject.SetActive(true);
         listImage[0].DOFade(1f, 1f);
-        text.DOText("Team Golden Ring Present.", 1.5f);
+        text.DOText("Team Carpe Diem Presents", 1.5f);
 
         yield return new WaitForSeconds(1.5f);
 
