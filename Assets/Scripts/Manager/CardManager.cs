@@ -130,6 +130,7 @@ public class CardManager : MonoBehaviour
                 tmpG = Get_Card();
                 if (tmpG != null)
                 {
+                    //SoundManager.instance.PlayAudio(SoundType.LoadDeck);
                     listMarketCardGO.Add(tmpG);
                     listMarketCardCS.Add(tmpG.GetComponent<CardScript>());
                 }
@@ -178,7 +179,7 @@ public class CardManager : MonoBehaviour
 
         Add_Market();
         RePosition_MarketCard();
-
+        SoundManager.instance.PlayAudio(SoundType.LoadDeck);
         //임시 카드 이동
         //tmpCard.transform.DOMove(new Vector2(100, 0),1f);
 
@@ -190,6 +191,8 @@ public class CardManager : MonoBehaviour
     /// </summary>
     private void RePosition_MarketCard()
     {
+
+        SoundManager.instance.PlayAudio(SoundType.LoadDeck);
         //리포지션 변경
         //listMarketHolder의 첫 인덱스와 끝 인덱스를 참조하여 카드들을 내부에 자동 정렬.
 

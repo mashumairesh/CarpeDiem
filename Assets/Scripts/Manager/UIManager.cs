@@ -95,6 +95,7 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator corFunc_PopupPurchaseUI()
     {
+        SoundManager.instance.PlayAudio(SoundType.UIOn);
         ButtonClose();
         ShoppingPannel.DOMoveY(1080 * 2, 0f);
         ShoppingPannel.gameObject.SetActive(true);
@@ -112,6 +113,7 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator corFunc_PopDownPurchaseUI()
     {
+        SoundManager.instance.PlayAudio(SoundType.UIOff);
         ButtonClose();
         ShoppingBreaker.SetActive(false);
         ShoppingPannel.gameObject.SetActive(true);

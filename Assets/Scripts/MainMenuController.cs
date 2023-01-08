@@ -27,14 +27,22 @@ public class MainMenuController : MonoBehaviour
             Rules[i].SetActive(false);
     }
 
+    private void SoundClick()
+    {
+        if (SoundManager.instance != null)
+            SoundManager.instance.PlayAudio(SoundType.UIBtn);
+    }
+
     public void BTN_CallExit()
     {
         StartCoroutine(ExitAuto());
+        SoundClick();
     }
 
     public void BTN_CallStart()
     {
         SceneManager.LoadScene(2);
+        SoundClick();
     }
 
 
@@ -58,6 +66,7 @@ public class MainMenuController : MonoBehaviour
 
     public void BTN_CallRuleBook()
     {
+        SoundClick();
         isOpenRule = true;
         //∑Í∫œ¿ª ø±¥œ¥Ÿ.
         RuleBookHolder.SetActive(true);
@@ -66,6 +75,7 @@ public class MainMenuController : MonoBehaviour
 
     public void BTN_ContinueRule()
     {
+        SoundClick();
         switch (RuleNowPage)
         {
             case 0:

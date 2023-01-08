@@ -146,6 +146,9 @@ public class TableManager : MonoBehaviour
                 yield return new WaitUntil(() => playerAfterTurnEnd == true);
                 playerAfterTurnEnd = false;
 
+                yield return new WaitForSeconds(0.5f);
+
+                SoundManager.instance.PlayAudio(SoundType.Bell);
 
                 DrawPannel();
             }
